@@ -1,0 +1,34 @@
+{
+  "name": "rsclone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "SET NODE_ENV='production' && webpack",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamheinDM/rsclone.git"
+  },
+  "author": "SamheinDM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamheinDM/rsclone/issues"
+  },
+  "homepage": "https://github.com/SamheinDM/rsclone#readme",
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.1",
+    "style-loader": "^2.0.0",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^5.12.3",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.10"
+  }
+}
