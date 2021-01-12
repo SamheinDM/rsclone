@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint linebreak-style: ["error", "windows"] */
 /**
  * @param {String} HTMLtag
  * @param {String} classNames
