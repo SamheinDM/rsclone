@@ -23,7 +23,7 @@ export default function create(HTMLtag, classNames, parent, ...dataAttr) {
 
   if (dataAttr.length) {
     dataAttr.forEach(([attrName, attrValue]) => {
-      if (attrName.match(/value|id|src|type|hidden|href|alt|name|width|height|for|required/)) {
+      if (attrName.match(/value|id|src|type|hidden|href|alt|name|width|height|for|required|autocomplete/)) {
         element.setAttribute(attrName, attrValue);
       } else if (attrName.match(/textContent/)) {
         element.textContent = `${attrValue}`;
