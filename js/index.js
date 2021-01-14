@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
 import '../css/main.css';
-import { autentication } from './network_api.js';
+import NetAPI from './network_api.js';
 import ChatList from './chat_list.js';
 import Login from './login.js';
 import create from './utils/create.js';
@@ -20,7 +20,7 @@ function initMainWindow() {
 document.querySelector('body').addEventListener('login', () => initMainWindow());
 
 if (loggedInfo) {
-  const isAuthorized = autentication(loggedInfo[0], loggedInfo[1]);
+  const isAuthorized = NetAPI.authentication(loggedInfo[0], loggedInfo[1]);
   if (!isAuthorized) {
     new Login().init();
   }

@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
 import create from './utils/create.js';
-import { autentication } from './network_api.js';
+import NetAPI from './network_api.js';
 import { set } from './utils/storage.js';
 
 export default class Login {
@@ -22,7 +22,7 @@ export default class Login {
     event.preventDefault();
     const login = document.getElementById('login_input');
     const password = document.getElementById('pass_input');
-    const result = autentication(login.value, password.value);
+    const result = NetAPI.authentication(login.value, password.value);
     if (result) {
       this.body.removeChild(this.wrapper);
       set('logged', [login.value, password.value]);
