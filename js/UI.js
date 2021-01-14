@@ -4,7 +4,7 @@ import create from './utils/create.js';
 
 export default class UI {
   constructor() {
-    this.body = document.querySelector('body');
+    this.body = document.body;
     this.wrapper = null;
     this.leftPanel = null;
     this.rightPanel = null;

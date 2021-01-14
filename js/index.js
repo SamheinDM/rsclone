@@ -17,7 +17,7 @@ function initMainWindow() {
   chatList.init(loggedInfo[0])
 }
 
-document.querySelector('body').addEventListener('login', () => initMainWindow());
+document.body.addEventListener('login', () => initMainWindow());
 
 if (loggedInfo) {
   const isAuthorized = NetAPI.authentication(loggedInfo[0], loggedInfo[1]);
