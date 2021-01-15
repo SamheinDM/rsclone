@@ -4,31 +4,31 @@ const NetAPI = function() {
   const tempInfo = [{
     name: 'Serhgf',
     messages: [{
-      time: '2020-25-05 22:05',
+      time: [2020, 5, 25, 22, 5],
       content: 'nrjycnsfdbfdb',
       author: 'Serhgf'
     }, {
-      time: '2020-25-05 23:05',
+      time: [2020, 25, 5, 23, 5],
       content: 'nrjycnasfcerhgsfdbfdb',
       author: 'a'
     }]}, {
     name: 'fmnedn',
     messages: [{
-      time: '2020-22-05 12:05',
+      time: [2020, 22, 5, 12, 5],
       content: 'mjk.g,iu.gu.',
       author: 'a'
     }, {
-      time: '2021-05-01 23:05',
+      time: [2021, 5, 1, 23, 5],
       content: 'dfhsrtj',
       author: 'fmnedn'
     }]}, {
     name: 'hvfyktm',
     messages: [{
-      time: '2020-01-03 23:05',
+      time: [2020, 1, 3, 23, 5],
       content: 'm,my.i',
       author: 'hvfyktm'
     }, {
-      time: '2020-25-05 23:05',
+      time: [2020, 25, 5, 23, 5],
       content: '.ouil,hu,',
       author: 'a'
     }]}];
