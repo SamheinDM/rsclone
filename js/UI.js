@@ -24,9 +24,9 @@ export default class UI {
     create('div', 'menu', mainMenuWrapper);
   }
 
-  notificationInit() {
-    this.notification = create('div', 'notification', this.leftPanel);
-  }
+  // notificationInit() {
+  //   this.notification = create('div', 'notification', this.leftPanel);
+  // }
 
   chatSearchInit() {
     this.chatSearch = create('div', 'chat_search', this.leftPanel);
@@ -37,7 +37,7 @@ export default class UI {
     this.leftPanel = create('div', 'left_panel', this.wrapper, ['id', 'main_panel']);
     this.rightPanel = create('div', 'right_panel', this.wrapper);
     this.leftHeaderInit();
-    this.notificationInit();
+    // this.notificationInit();
     this.chatSearchInit();
   }
 }

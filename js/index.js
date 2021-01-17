@@ -4,7 +4,7 @@ import '../css/main.css';
 import NetAPI from './network_api.js';
 import ChatList from './chat_list.js';
 import Login from './login.js';
-import create from './utils/create.js';
+// import create from './utils/create.js';
 import { get } from './utils/storage.js';
 import UI from './UI.js';
 
@@ -14,7 +14,7 @@ const chatList = new ChatList();
 
 function initMainWindow() {
   userInterface.init();
-  chatList.init(loggedInfo[0])
+  chatList.init(loggedInfo[0]);
 }
 
 document.body.addEventListener('login', () => initMainWindow());
@@ -27,4 +27,3 @@ if (loggedInfo) {
 } else {
   new Login().init();
 }
-

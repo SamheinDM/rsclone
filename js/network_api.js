@@ -1,37 +1,172 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
-const NetAPI = function() {
+const NetAPI = (function () {
   const tempInfo = [{
     name: 'Serhgf',
     messages: [{
       time: [2020, 5, 25, 22, 5],
       content: 'nrjycnsfdbfdb',
-      author: 'Serhgf'
+      author: 'Serhgf',
     }, {
-      time: [2020, 25, 5, 23, 5],
+      time: [2021, 0, 16, 23, 5],
       content: 'nrjycnasfcerhgsfdbfdb',
-      author: 'a'
-    }]}, {
+      author: 'a',
+    }],
+  }, {
     name: 'fmnedn',
     messages: [{
       time: [2020, 22, 5, 12, 5],
       content: 'mjk.g,iu.gu.',
-      author: 'a'
+      author: 'a',
     }, {
       time: [2021, 5, 1, 23, 5],
       content: 'dfhsrtj',
-      author: 'fmnedn'
-    }]}, {
+      author: 'fmnedn',
+    }],
+  }, {
     name: 'hvfyktm',
     messages: [{
       time: [2020, 1, 3, 23, 5],
       content: 'm,my.i',
-      author: 'hvfyktm'
+      author: 'hvfyktm',
     }, {
-      time: [2020, 25, 5, 23, 5],
+      time: [2020, 1, 5, 23, 5],
       content: '.ouil,hu,',
-      author: 'a'
-    }]}];
+      author: 'a',
+    }],
+  }, {
+    name: 'Serhgf',
+    messages: [{
+      time: [2020, 5, 25, 22, 5],
+      content: 'nrjycnsfdbfdb',
+      author: 'Serhgf',
+    }, {
+      time: [2020, 11, 5, 23, 5],
+      content: 'nrjycnasfcerhgsfdbfdb',
+      author: 'a',
+    }],
+  }, {
+    name: 'fmnedn',
+    messages: [{
+      time: [2020, 22, 5, 12, 5],
+      content: 'mjk.g,iu.gu.',
+      author: 'a',
+    }, {
+      time: [2021, 5, 1, 23, 5],
+      content: 'dfhsrtj',
+      author: 'fmnedn',
+    }],
+  }, {
+    name: 'hvfyktm',
+    messages: [{
+      time: [2020, 1, 3, 23, 5],
+      content: 'm,my.i',
+      author: 'hvfyktm',
+    }, {
+      time: [2020, 1, 5, 23, 5],
+      content: '.ouil,hu,',
+      author: 'a',
+    }],
+  }, {
+    name: 'Serhgf',
+    messages: [{
+      time: [2020, 5, 25, 22, 5],
+      content: 'nrjycnsfdbfdb',
+      author: 'Serhgf',
+    }, {
+      time: [2020, 11, 5, 23, 5],
+      content: 'nrjycnasfcerhgsfdbfdb',
+      author: 'a',
+    }],
+  }, {
+    name: 'fmnedn',
+    messages: [{
+      time: [2020, 22, 5, 12, 5],
+      content: 'mjk.g,iu.gu.',
+      author: 'a',
+    }, {
+      time: [2021, 5, 1, 23, 5],
+      content: 'dfhsrtj',
+      author: 'fmnedn',
+    }],
+  }, {
+    name: 'hvfyktm',
+    messages: [{
+      time: [2020, 1, 3, 23, 5],
+      content: 'm,my.i',
+      author: 'hvfyktm',
+    }, {
+      time: [2020, 1, 5, 23, 5],
+      content: '.ouil,hu,',
+      author: 'a',
+    }],
+  }, {
+    name: 'Serhgf',
+    messages: [{
+      time: [2020, 5, 25, 22, 5],
+      content: 'nrjycnsfdbfdb',
+      author: 'Serhgf',
+    }, {
+      time: [2020, 11, 5, 23, 5],
+      content: 'nrjycnasfcerhgsfdbfdb',
+      author: 'a',
+    }],
+  }, {
+    name: 'fmnedn',
+    messages: [{
+      time: [2020, 22, 5, 12, 5],
+      content: 'mjk.g,iu.gu.',
+      author: 'a',
+    }, {
+      time: [2021, 5, 1, 23, 5],
+      content: 'dfhsrtj',
+      author: 'fmnedn',
+    }],
+  }, {
+    name: 'hvfyktm',
+    messages: [{
+      time: [2020, 1, 3, 23, 5],
+      content: 'm,my.i',
+      author: 'hvfyktm',
+    }, {
+      time: [2020, 1, 5, 23, 5],
+      content: '.ouil,hu,',
+      author: 'a',
+    }],
+  }, {
+    name: 'Serhgf',
+    messages: [{
+      time: [2020, 5, 25, 22, 5],
+      content: 'nrjycnsfdbfdb',
+      author: 'Serhgf',
+    }, {
+      time: [2020, 11, 5, 23, 5],
+      content: 'nrjycnasfcerhgsfdbfdb',
+      author: 'a',
+    }],
+  }, {
+    name: 'fmnedn',
+    messages: [{
+      time: [2020, 22, 5, 12, 5],
+      content: 'mjk.g,iu.gu.',
+      author: 'a',
+    }, {
+      time: [2021, 5, 1, 23, 5],
+      content: 'dfhsrtj',
+      author: 'fmnedn',
+    }],
+  }, {
+    name: 'hvfyktm',
+    messages: [{
+      time: [2020, 1, 3, 23, 5],
+      content: 'm,my.i',
+      author: 'hvfyktm',
+    }, {
+      time: [2020, 1, 5, 23, 5],
+      content: '.ouil,hu,',
+      author: 'a',
+    }],
+  }];
   let chatInfo;
 
   const getChatInfo = (user) => {
@@ -43,7 +178,7 @@ const NetAPI = function() {
   const getChatList = (user) => {
     getChatInfo();
     return chatInfo;
-  }
+  };
 
   const authentication = (login, password) => {
     if (login === 'a' && password === 's') {
@@ -51,12 +186,12 @@ const NetAPI = function() {
       return true;
     }
     return false;
-  }
+  };
 
   return {
-    getChatList: getChatList,
-    authentication: authentication,
-  }
-}();
+    getChatList,
+    authentication,
+  };
+}());
 
 export default NetAPI;

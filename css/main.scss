@@ -6,6 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
   background-color: #dddbd1;
 }
 
@@ -20,14 +21,14 @@ body::after {
 
 .main_wrapper {
   width: 1396px;
-  height: 931px;
+  height: 96%;
   z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #e7e5e5;
-  box-shadow: 0px 0px 7px black;
+  background-color: #e7e7e7;
+  box-shadow: 0px 0px 6px rgb(172, 172, 172);
 }
 
 .login_screen {
@@ -54,7 +55,7 @@ body::after {
 
 .left_panel {
   height: 100%;
-  width: 40%;
+  width: 30%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -65,11 +66,11 @@ body::after {
     background-color: #ededed;
   }
 
-  .notification {
-    width: 100%;
-    height: 110px;
-    background-color: #9de1fe;
-  }
+  // .notification {
+  //   width: 100%;
+  //   height: 110px;
+  //   background-color: #9de1fe;
+  // }
 
   .chat_search {
     width: 100%;
@@ -80,6 +81,7 @@ body::after {
   .chat_list_wrapper {
     width: 100%;
     flex-grow: 1;
+    overflow-y: scroll;
 
     .chat_element {
       height: 72px;
@@ -87,21 +89,78 @@ body::after {
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
+      user-select: none;
+
+      .user_photo_wrapper {
+        height: 49px;
+        width: 49px;
+        padding: 0 15px;
+      }
+
+      .msg_info_wrapper {
+        height: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .info_wrapper {
+          padding-bottom: 3px;
+          display: flex;
+          justify-content: space-between;
+
+          .chat_list_user_name {
+            font-size: 17px;
+            font-weight: 500;
+          }
+
+          .chat_list_last_date {
+            padding-right: 15px;
+            font-size: 12px;
+          }
+        }
+
+        .last_msg_wrapper {
+          .last_msg {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .chat_element .msg_info_wrapper:not(:first-child) {
+      border-top: 1px solid #f1f1f1;
     }
 
     .chat_element:hover {
       background-color: #ededed;
     }
+
+    .chat_element_active {
+      background-color: #dadada;
+    }
+
+    .chat_element_active:hover {
+      background-color: #dadada;
+    }
+  }
+
+  .chat_list_wrapper::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat_list_wrapper::-webkit-scrollbar-thumb {
+    background: rgb(180, 179, 179)
   }
 }
 
 .right_panel {
   height: 100%;
-  width: 61%;
+  flex-grow: 1;
   background-color: gray;
 }
 
-@media (max-width: 1397px) {
+@media (max-width: 1440px) {
   .main_wrapper {
     width: 100%;
     height: 100%;

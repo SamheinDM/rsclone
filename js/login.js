@@ -20,7 +20,7 @@ export default class Login {
     }
   }
 
-  submitLogin (event) {
+  submitLogin(event) {
     event.preventDefault();
     const result = NetAPI.authentication(this.loginInput.value, this.passwordInput.value);
     if (result) {
@@ -36,15 +36,15 @@ export default class Login {
     this.wrapper = create('div', 'main_wrapper login_screen', this.body);
     const form = create('form', 'login_form', this.wrapper, ['id', 'login_form']);
     create('label', 'login_label', form, ['for', 'login_input'], ['textContent', 'Login: ']);
-    this.loginInput = create('input', 'login_input', form, 
-      ['id', 'login_input'], 
-      ['required', true], 
+    this.loginInput = create('input', 'login_input', form,
+      ['id', 'login_input'],
+      ['required', true],
       ['autocomplete', 'username']);
     create('label', 'login_label', form, ['for', 'pass_input'], ['textContent', 'Password: ']);
     this.passwordInput = create('input', 'login_input', form,
       ['id', 'pass_input'],
       ['required', true],
-      ['type', 'password'], 
+      ['type', 'password'],
       ['autocomplete', 'current-password']);
     const btnWrapper = create('div', 'login_btn_wrapper', form);
     const loginBtn = create('button', 'login_btn', btnWrapper, ['type', 'submit'], ['textContent', 'Login']);
