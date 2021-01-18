@@ -19,6 +19,14 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   output: {
@@ -32,6 +40,9 @@ module.exports = {
       favicon: '',
       hash: true,
     }),
+    {
+      "plugins": ["@babel/plugin-syntax-class-properties"]
+    },
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

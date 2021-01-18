@@ -4,12 +4,14 @@
 import defaultLogo from '../assets/default_user.svg';
 import create from './utils/create.js';
 import NetAPI from './network_api.js';
+import ChatWindow from './chat_window';
 
 export default class ChatList {
   constructor() {
     this.mainPanel = null;
     this.chatListWrapper = null;
     this.chatList = null;
+    this.chat = null;
     this.daysArr = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
   }
 
@@ -36,7 +38,13 @@ export default class ChatList {
     return `${day}.${month}.${year}`;
   }
 
-  clickOnChat(e) {
+  getMessagesFromChat(e) {
+    const chatsArr = document.querySelectorAll('.chat_element');
+    const indexOfClickedChat = chatsArr.indexOf(e.target);
+    return this.chatList[indexOfClickedChat].messages;
+  }
+
+  clickOnChat = (e) => {
     e.preventDefault();
     const clikeedChatElement = e.target.closest('.chat_element');
     if (clikeedChatElement) {
@@ -45,6 +53,9 @@ export default class ChatList {
         chatListArr[i].classList.remove('chat_element_active');
       }
       clikeedChatElement.classList.toggle('chat_element_active');
+
+      this.chat = new ChatWindow().init(this.getMessagesFromChat(e));
+      // this.chat.renderMessages(this.getMessagesFromChat(e));
     }
   }
 

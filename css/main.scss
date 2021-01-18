@@ -60,12 +60,6 @@ body::after {
   display: flex;
   flex-direction: column;
 
-  .main_header {
-    width: 100%;
-    height: 60px;
-    background-color: #ededed;
-  }
-
   // .notification {
   //   width: 100%;
   //   height: 110px;
@@ -131,8 +125,6 @@ body::after {
 
     .chat_element .msg_info_wrapper:nth-child(n+2) {
       border-top: 1px solid #f1f1f1;
-      outline: 1px 0 0 0 solid green;
-      outline-offset: -1px;
     }
 
     .chat_element:hover {
@@ -157,10 +149,36 @@ body::after {
   }
 }
 
+.main_header {
+  width: 100%;
+  height: 60px;
+  background-color: #ededed;
+}
+
 .right_panel {
   height: 100%;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   background-color: rgb(250, 250, 250);
+
+  .chat_wrapper {
+    flex-grow: 1;
+    background-color: rgb(229, 221, 213);
+
+    .chat_bg {
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/bg-chat-tile-light.png');
+    opacity: 0.06;
+    }
+  }
+
+  .chat_footer {
+    height: 62px;
+    width: 100%;
+    background-color: #ededed;
+  }
 }
 
 @media (max-width: 1440px) {
