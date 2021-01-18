@@ -52,8 +52,8 @@ export default class ChatList {
   sortByDate(a, b) {
     let firstDate = a.messages[a.messages.length - 1].time;
     let secondDate = b.messages[b.messages.length - 1].time;
-    firstDate = new Date(...firstDate).getTime();
-    secondDate = new Date(...secondDate).getTime();
+    firstDate = new Date(...firstDate);
+    secondDate = new Date(...secondDate);
     return secondDate - firstDate;
   }
 
@@ -70,8 +70,8 @@ export default class ChatList {
     for (let i = 0; i < this.chatList.length; i += 1) {
       const wrapper = create('div', 'chat_element', this.chatListWrapper);
 
-      const photoWrapper = create('div', 'user_photo_wrapper', wrapper);
-      photoWrapper.innerHTML = defaultLogo;
+      const photoWrapper = create('img', 'user_photo_wrapper', wrapper);
+      photoWrapper.setAttribute('src', defaultLogo);
 
       const { messages } = this.chatList[i];
       const lastMessage = messages[messages.length - 1];

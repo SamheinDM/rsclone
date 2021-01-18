@@ -75,6 +75,7 @@ body::after {
   .chat_search {
     width: 100%;
     height: 50px;
+    border-bottom: 1px solid #e4e4e4;
     background-color: #faf5f5;
   }
 
@@ -128,8 +129,10 @@ body::after {
       }
     }
 
-    .chat_element .msg_info_wrapper:not(:first-child) {
+    .chat_element .msg_info_wrapper:nth-child(n+2) {
       border-top: 1px solid #f1f1f1;
+      outline: 1px 0 0 0 solid green;
+      outline-offset: -1px;
     }
 
     .chat_element:hover {
