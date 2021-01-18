@@ -7,7 +7,6 @@ import NetAPI from './network_api.js';
 
 export default class ChatList {
   constructor() {
-    this.body = document.body;
     this.mainPanel = null;
     this.chatListWrapper = null;
     this.chatList = null;

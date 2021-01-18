@@ -9,7 +9,6 @@ export default class UI {
     this.leftPanel = null;
     this.rightPanel = null;
     this.leftHeader = null;
-    this.rightHeader = null;
     this.notification = null;
     this.chatSearch = null;
   }
@@ -35,7 +34,7 @@ export default class UI {
   init() {
     this.wrapper = create('div', 'main_wrapper', this.body);
     this.leftPanel = create('div', 'left_panel', this.wrapper, ['id', 'main_panel']);
-    this.rightPanel = create('div', 'right_panel', this.wrapper);
+    this.rightPanel = create('div', 'right_panel', this.wrapper, ['id', 'chat_panel']);
     this.leftHeaderInit();
     // this.notificationInit();
     this.chatSearchInit();
