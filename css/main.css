@@ -174,6 +174,13 @@ body::after {
   font-size: 12px;
 }
 
+.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper {
+  width: 320px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper .last_msg {
   font-size: 14px;
 }
@@ -199,7 +206,7 @@ body::after {
 }
 
 .left_panel .chat_list_wrapper::-webkit-scrollbar-thumb {
-  background: #b4b3b3;
+  background: #c4c4c4;
 }
 
 .main_header {
@@ -246,16 +253,85 @@ body::after {
   left: 0;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg {
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0 40px;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg {
+  min-width: 95px;
+  max-width: 512px;
   margin-bottom: 12px;
+  padding: 6px 7px 8px 9px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  border-radius: 7.5px;
+  -webkit-box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+          box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_tail {
+  position: absolute;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .left_tail {
+  left: -8px;
+  top: 0;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .right_tail {
+  right: -8px;
+  top: 0;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content {
+  padding-right: 25px;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content .msg_text {
+  font-size: 14.2px;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper {
+  margin: 7px 0 -5px 4px;
+  position: relative;
+  float: right;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper .msg_time {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .incoming_bg {
+  background-color: white;
+  border-top-left-radius: 0;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .outgoing_bg {
+  background-color: #dcf8c6;
+  border-top-right-radius: 0;
 }
 
 .right_panel .chat_wrapper .msgs_wrapper .incoming {

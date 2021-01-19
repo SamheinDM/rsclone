@@ -3,7 +3,7 @@
 import leftTail from '../assets/left_tail.svg';
 import rightTail from '../assets/right_tail.svg';
 import create from './utils/create';
-import getDate from './utils/get_date.js';
+import { getTime } from './utils/get_date.js';
 import { get } from './utils/storage';
 
 export default class ChatWindow {
@@ -34,21 +34,23 @@ export default class ChatWindow {
       let tail = leftTail;
       let tailClass = 'left_tail';
       let msgClass = 'incoming';
+      let msgClassBg = 'incoming_bg';
       if (this.userName === messages[i].author) {
         tail = rightTail;
         tailClass = 'right_tail';
         msgClass = 'outgoing';
+        msgClassBg = 'outgoing_bg';
       }
 
       const date = new Date(...messages[i].time);
-      const wrapper = create('div', 'msg_wrapper', this.messagesWrapper);
-      const msg = create('div', `msg ${msgClass}`, wrapper);
+      const wrapper = create('div', `msg_wrapper ${msgClass}`, this.messagesWrapper);
+      const msg = create('div', `msg ${msgClassBg}`, wrapper);
       const msgTail = create('img', `msg_tail ${tailClass}`, msg);
       const msgInfo = create('div', 'msg_info_wrapper', msg);
       const msgContentWrapper = create('div', 'msg_content', msgInfo);
       const msgContent = create('span', 'msg_text', msgContentWrapper, ['textContent', messages[i].content]);
       const timeWrapper = create('div', 'msg_time_wrapper', msgInfo);
-      const time = create('span', 'msg_time', timeWrapper, ['textContent', getDate(date)]);
+      const time = create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
 
       msgTail.setAttribute('src', tail);
     }

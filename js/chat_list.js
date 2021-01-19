@@ -5,7 +5,7 @@ import defaultLogo from '../assets/default_user.svg';
 import create from './utils/create.js';
 import NetAPI from './network_api.js';
 import ChatWindow from './chat_window';
-import getDate from './utils/get_date.js';
+import { getDate } from './utils/get_date.js';
 
 export default class ChatList {
   constructor() {

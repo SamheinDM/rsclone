@@ -116,6 +116,11 @@ body::after {
         }
 
         .last_msg_wrapper {
+          width: 320px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
           .last_msg {
             font-size: 14px;
           }
@@ -145,7 +150,7 @@ body::after {
   }
 
   .chat_list_wrapper::-webkit-scrollbar-thumb {
-    background: rgb(180, 179, 179)
+    background: rgb(196, 196, 196)
   }
 }
 
@@ -181,11 +186,70 @@ body::after {
       top: 0;
       left: 0;
 
-      .msg {
-        padding: 0 40px;
-        margin-bottom: 12px;
-        flex-direction: row;
+      .msg_wrapper {
         display: flex;
+        padding: 0 40px;
+
+        .msg {
+          min-width: 95px;
+          max-width: 512px;
+          margin-bottom: 12px;
+          padding: 6px 7px 8px 9px;
+          position: relative;
+          display: flex;
+          flex: none;
+          flex-direction: row;
+          border-radius: 7.5px;
+          box-shadow: 0 1px .5px rgba(0, 0, 0, 0.13);
+
+          .msg_tail {
+            position: absolute;
+          }
+
+          .left_tail {
+            left: -8px;
+            top: 0;
+          }
+
+          .right_tail {
+            right: -8px;
+            top: 0;
+          }
+
+          .msg_info_wrapper {
+            display: flex;
+            flex-direction: row;
+
+            .msg_content {
+              padding-right: 25px;
+              
+              .msg_text {
+                font-size: 14.2px;
+              }
+            }
+
+            .msg_time_wrapper {
+              margin: 7px 0 -5px 4px;
+              position: relative;
+              float: right;
+
+              .msg_time {
+                font-size: 11px;
+                color: rgba(0, 0, 0, 0.45);
+              }
+            }
+          }
+        }
+
+        .incoming_bg {
+          background-color: white;
+          border-top-left-radius: 0;
+        }
+  
+        .outgoing_bg {
+          background-color: rgb(220, 248, 198);
+          border-top-right-radius: 0;
+        }
       }
 
       .incoming {
