@@ -163,6 +163,7 @@ body::after {
   background-color: rgb(250, 250, 250);
 
   .chat_wrapper {
+    position: relative;
     flex-grow: 1;
     background-color: rgb(229, 221, 213);
 
@@ -171,6 +172,29 @@ body::after {
     height: 100%;
     background-image: url('../assets/bg-chat-tile-light.png');
     opacity: 0.06;
+    }
+
+    .msgs_wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .msg {
+        padding: 0 40px;
+        margin-bottom: 12px;
+        flex-direction: row;
+        display: flex;
+      }
+
+      .incoming {
+        justify-content: flex-start;
+      }
+
+      .outgoing {
+        justify-content: flex-end;
+      }
     }
   }
 

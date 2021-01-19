@@ -40,9 +40,6 @@ module.exports = {
       favicon: '',
       hash: true,
     }),
-    {
-      "plugins": ["@babel/plugin-syntax-class-properties"]
-    },
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
