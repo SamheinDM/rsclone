@@ -129,6 +129,7 @@ body::after {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  cursor: pointer;
 }
 
 .left_panel .chat_list_wrapper .chat_element .user_photo_wrapper {
@@ -245,24 +246,49 @@ body::after {
   opacity: 0.06;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper {
+.right_panel .chat_wrapper .msgs_area_wrapper {
   width: 100%;
   height: 100%;
-  position: absolute;
   top: 0;
   left: 0;
-}
-
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 9%;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg {
   min-width: 95px;
-  max-width: 512px;
+  max-width: 90%;
   margin-bottom: 12px;
   padding: 6px 7px 8px 9px;
   position: relative;
@@ -281,69 +307,91 @@ body::after {
           box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_tail {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_tail {
   position: absolute;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .left_tail {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .left_tail {
   left: -8px;
   top: 0;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .right_tail {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .right_tail {
   right: -8px;
   top: 0;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper {
+  width: 100%;
+  display: block;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content {
-  padding-right: 25px;
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content .msg_text {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content .msg_text {
+  line-height: 19px;
   font-size: 14.2px;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper {
-  margin: 7px 0 -5px 4px;
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_content .msg_text::after {
+  content: '';
+  display: inline-block;
+  width: 57px;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper {
+  margin: -10px 0 -5px 4px;
+  display: block;
   position: relative;
   float: right;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper .msg_time {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper .msg_time {
   font-size: 11px;
   color: rgba(0, 0, 0, 0.45);
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .incoming_bg {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg .msg_info_wrapper .msg_time_wrapper::before {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .incoming_bg {
   background-color: white;
   border-top-left-radius: 0;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .msg_wrapper .outgoing_bg {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .outgoing_bg {
   background-color: #dcf8c6;
   border-top-right-radius: 0;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .incoming {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .incoming {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
 
-.right_panel .chat_wrapper .msgs_wrapper .outgoing {
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .outgoing {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.right_panel .chat_wrapper .msgs_wrapper::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5);
 }
 
 .right_panel .chat_footer {
@@ -356,6 +404,36 @@ body::after {
   .main_wrapper {
     width: 100%;
     height: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+    padding: 0 7%;
+  }
+}
+
+@media (max-width: 968px) {
+  .right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+    padding: 0 6.5%;
+  }
+}
+
+@media (max-width: 912px) {
+  .right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+    padding: 0 6%;
+  }
+}
+
+@media (max-width: 856px) {
+  .right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+    padding: 0 5.5%;
+  }
+}
+
+@media (max-width: 800px) {
+  .right_panel .chat_wrapper .msgs_wrapper .msg_wrapper {
+    padding: 0 5%;
   }
 }
 /*# sourceMappingURL=main.css.map */

@@ -23,13 +23,16 @@ export default class ChatWindow {
     this.header = create('header', 'main_header', this.mainChatWrapper);
     this.chatWrapper = create('div', 'chat_wrapper', this.mainChatWrapper);
     create('div', 'chat_bg', this.chatWrapper);
-    this.messagesWrapper = create('div', 'msgs_wrapper', this.chatWrapper);
+    this.msgsAreaWrapper = create('div', 'msgs_area_wrapper', this.chatWrapper);
+    this.messagesWrapper = create('div', 'msgs_wrapper', this.msgsAreaWrapper);
     this.footer = create('footer', 'chat_footer', this.mainChatWrapper);
 
     this.renderMessages(messages);
   }
 
-  renderMessages(messages) {
+  renderMessages(messagesArr) {
+    const messages = messagesArr.reverse();
+
     for (let i = 0; i < messages.length; i += 1) {
       let tail = leftTail;
       let tailClass = 'left_tail';
