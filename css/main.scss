@@ -60,11 +60,38 @@ body::after {
   display: flex;
   flex-direction: column;
 
-  // .notification {
-  //   width: 100%;
-  //   height: 110px;
-  //   background-color: #9de1fe;
-  // }
+  .main_header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ededed;
+
+    .main_user_photo_wrapper {
+      width: 40px;
+      height: 40px;
+      padding: 10px 16px;
+
+      .user_photo {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .main_menu_wrapper {
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: row;
+
+      .menu_btn {
+        width: 24px;
+        height: 24px;
+        padding: 6px;
+      }
+    }
+  }
 
   .chat_search {
     width: 100%;
@@ -153,12 +180,6 @@ body::after {
   .chat_list_wrapper::-webkit-scrollbar-thumb {
     background: rgb(196, 196, 196)
   }
-}
-
-.main_header {
-  width: 100%;
-  height: 60px;
-  background-color: #ededed;
 }
 
 .right_panel {

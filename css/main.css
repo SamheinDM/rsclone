@@ -95,6 +95,53 @@ body::after {
           flex-direction: column;
 }
 
+.left_panel .main_header {
+  width: 100%;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #ededed;
+}
+
+.left_panel .main_header .main_user_photo_wrapper {
+  width: 40px;
+  height: 40px;
+  padding: 10px 16px;
+}
+
+.left_panel .main_header .main_user_photo_wrapper .user_photo {
+  width: 40px;
+  height: 40px;
+}
+
+.left_panel .main_header .main_menu_wrapper {
+  padding: 10px 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.left_panel .main_header .main_menu_wrapper .menu_btn {
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+}
+
 .left_panel .chat_search {
   width: 100%;
   height: 50px;
@@ -208,12 +255,6 @@ body::after {
 
 .left_panel .chat_list_wrapper::-webkit-scrollbar-thumb {
   background: #c4c4c4;
-}
-
-.main_header {
-  width: 100%;
-  height: 60px;
-  background-color: #ededed;
 }
 
 .right_panel {

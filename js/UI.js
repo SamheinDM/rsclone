@@ -1,6 +1,9 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
 import create from './utils/create.js';
+import defaultLogo from '../assets/default_user.svg';
+import newChatIcon from '../assets/chat_icon.svg';
+import menuIcon from '../assets/menu_icon.svg';
 
 export default class UI {
   constructor() {
@@ -15,17 +18,15 @@ export default class UI {
 
   leftHeaderInit() {
     this.leftHeader = create('header', 'main_header', this.leftPanel);
-    const userWrapper = create('div', null, this.leftHeader);
-    create('img', 'user_photo', userWrapper);
-    const mainMenuWrapper = create('div', null, this.leftHeader);
-    create('div', 'status', mainMenuWrapper);
-    create('div', 'new_chat', mainMenuWrapper);
-    create('div', 'menu', mainMenuWrapper);
+    const userWrapper = create('div', 'main_user_photo_wrapper', this.leftHeader);
+    create('img', 'user_photo', userWrapper, ['src', defaultLogo]);
+    const mainMenuWrapper = create('div', 'main_menu_wrapper', this.leftHeader);
+    // create('div', 'status', mainMenuWrapper);
+    const newChat = create('div', 'menu_btn', mainMenuWrapper);
+    create('img', 'new_chat_icon', newChat, ['src', newChatIcon]);
+    const menu = create('div', 'menu_btn', mainMenuWrapper);
+    create('img', 'menu_icon', menu, ['src', menuIcon]);
   }
-
-  // notificationInit() {
-  //   this.notification = create('div', 'notification', this.leftPanel);
-  // }
 
   chatSearchInit() {
     this.chatSearch = create('div', 'chat_search', this.leftPanel);
@@ -36,7 +37,6 @@ export default class UI {
     this.leftPanel = create('div', 'left_panel', this.wrapper, ['id', 'main_panel']);
     this.rightPanel = create('div', 'right_panel', this.wrapper, ['id', 'chat_panel']);
     this.leftHeaderInit();
-    // this.notificationInit();
     this.chatSearchInit();
   }
 }
