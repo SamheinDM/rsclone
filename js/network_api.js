@@ -206,7 +206,7 @@ const NetAPI = (function () {
 
   const authentication = (login, password) => {
     if (login === 'a' && password === 's') {
-      document.querySelector('body').dispatchEvent(new Event('login'));
+      document.body.dispatchEvent(new Event('login'));
       return true;
     }
     return false;

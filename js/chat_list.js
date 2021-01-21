@@ -12,7 +12,7 @@ export default class ChatList {
     this.mainPanel = null;
     this.chatListWrapper = null;
     this.chatList = null;
-    this.chat = null;
+    this.chat = new ChatWindow();
   }
 
   getMessagesFromChat(chatEl) {
@@ -30,7 +30,7 @@ export default class ChatList {
       }
       clikeedChatElement.classList.toggle('chat_element_active');
 
-      this.chat = new ChatWindow().init(this.getMessagesFromChat(clikeedChatElement));
+      this.chat.init(this.getMessagesFromChat(clikeedChatElement));
       // this.chat.renderMessages(this.getMessagesFromChat(e));
     }
   }
