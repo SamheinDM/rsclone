@@ -3,16 +3,21 @@
 import leftTail from '../assets/left_tail.svg';
 import rightTail from '../assets/right_tail.svg';
 import create from './utils/create';
-import { getTime } from './utils/get_date.js';
+import { getMessageDate, getTime } from './utils/get_date.js';
 import { get } from './utils/storage';
 
 export default class ChatWindow {
   constructor() {
     this.mainChatWrapper = null;
     this.header = null;
+    this.chatWrapper = null;
+    this.msgsAreaWrapper = null;
+    this.messagesWrapper = null;
+    this.footer = null;
     this.userName = null;
     this.lastMsgUsername = null;
     this.lastMsg = null;
+    this.lastDate = null;
   }
 
   init(messages) {
@@ -47,10 +52,20 @@ export default class ChatWindow {
     };
   }
 
+  addDateMessage(date) {
+    const wrapper = create('div', 'msg_wrapper time_msg continue_msg', this.messagesWrapper);
+    create('span', 'time_msg_text', wrapper, ['textContent', getMessageDate(date)]);
+  }
+
   addMessage(messageObj, isFirstRender) {
     const classesObj = this.getClasses(messageObj.author);
 
     const date = new Date(...messageObj.time);
+    if (!this.lastDate || date.toDateString() !== this.lastDate.toDateString()) {
+      this.addDateMessage(date);
+    }
+    this.lastDate = date;
+
     const wrapper = create('div', `msg_wrapper ${classesObj.msgClass}`, this.messagesWrapper);
     const msg = create('div', `msg ${classesObj.msgClassBg} ${classesObj.sameAuthorClass}`, wrapper);
     if (!classesObj.sameAuthor) {

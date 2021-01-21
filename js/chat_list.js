@@ -5,7 +5,7 @@ import defaultLogo from '../assets/default_user.svg';
 import create from './utils/create.js';
 import NetAPI from './network_api.js';
 import ChatWindow from './chat_window';
-import { getDate } from './utils/get_date.js';
+import { getChatDate } from './utils/get_date.js';
 
 export default class ChatList {
   constructor() {
@@ -66,7 +66,7 @@ export default class ChatList {
       const msgInfoWrapper = create('div', 'msg_info_wrapper', wrapper);
       const infoWrapper = create('div', 'info_wrapper', msgInfoWrapper);
       create('span', 'chat_list_user_name', infoWrapper, ['textContent', this.chatList[i].name]);
-      create('span', 'chat_list_last_date', infoWrapper, ['textContent', getDate(date)]);
+      create('span', 'chat_list_last_date', infoWrapper, ['textContent', getChatDate(date)]);
 
       const lastMsgWrapper = create('div', 'last_msg_wrapper', msgInfoWrapper);
       create('span', 'last_msg', lastMsgWrapper, ['textContent', lastMessage.content]);

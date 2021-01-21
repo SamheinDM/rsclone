@@ -318,6 +318,19 @@ body::after {
         .outgoing {
           justify-content: flex-end;
         }
+
+        .time_msg {
+          margin: 8px 0;
+          justify-content: center;
+
+          .time_msg_text {
+            display: block;
+            padding: 8px;
+            border-radius: 7.5px;
+            background-color: rgba(225, 245, 254, 0.92);
+            box-shadow: 0 1px .5px rgba(0, 0, 0, 0.13);
+          }
+        }
       }
     }
 

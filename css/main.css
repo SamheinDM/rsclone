@@ -435,6 +435,22 @@ body::after {
           justify-content: flex-end;
 }
 
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .time_msg {
+  margin: 8px 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .time_msg .time_msg_text {
+  display: block;
+  padding: 8px;
+  border-radius: 7.5px;
+  background-color: rgba(225, 245, 254, 0.92);
+  -webkit-box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+          box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
 .right_panel .chat_wrapper .msgs_wrapper::-webkit-scrollbar {
   width: 6px;
 }
