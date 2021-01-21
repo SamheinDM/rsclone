@@ -21,16 +21,32 @@ export default class ChatWindow {
     this.lastDate = null;
   }
 
+  createNewMessage(e) {
+    e.preventDefault();
+    const input = document.getElementById('msg_input');
+    const msgObj = {
+      author: this.userName,
+      time: new Date(Date.now()),
+      content: input.value,
+    };
+    input.value = '';
+
+    this.addMessage(msgObj);
+  }
+
   createFooter() {
     this.footer = create('footer', 'chat_footer', this.mainChatWrapper);
     const inputWrapper = create('div', 'input_wrapper', this.footer);
     const inputForm = create('form', 'input_form', inputWrapper);
     const innerInputWrapper = create('div', 'inner_input_wrapper', inputForm);
-    const input = create('input', 'msg_input', innerInputWrapper);
-    const inputBtn = create('button', 'msg_input_btn', inputForm);
+    const input = create('input', 'msg_input', innerInputWrapper, ['id', 'msg_input']);
+    const inputBtn = create('button', 'msg_input_btn', inputForm, ['id', 'msg_input_btn'],
+      ['for', 'msg_input']);
     create('img', 'input_btn_img', inputBtn, ['src', inputIcon]);
 
     input.setAttribute('placeholder', 'Введите сообщение');
+
+    inputBtn.addEventListener('click', (e) => this.createNewMessage(e));
   }
 
   init(messages) {
@@ -74,7 +90,7 @@ export default class ChatWindow {
   addMessage(messageObj, isFirstRender) {
     const classesObj = this.getClasses(messageObj.author);
 
-    const date = new Date(...messageObj.time);
+    const date = new Date(messageObj.time);
     if (!this.lastDate || date.toDateString() !== this.lastDate.toDateString()) {
       this.addDateMessage(date);
     }

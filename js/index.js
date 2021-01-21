@@ -11,7 +11,7 @@ const loggedInfo = get('logged');
 const userInterface = new UI();
 const chatList = new ChatList();
 const msgObj = {
-  time: [2020, 5, 25, 22, 5],
+  time: new Date(...[2020, 5, 25, 22, 5]),
   content: 'nrjycnsfdbfdb',
   author: 'Serhgf',
 };
