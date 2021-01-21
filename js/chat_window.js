@@ -11,6 +11,8 @@ export default class ChatWindow {
     this.mainChatWrapper = null;
     this.header = null;
     this.userName = null;
+    this.lastMsgUsername = null;
+    this.lastMsg = null;
   }
 
   init(messages) {
@@ -31,35 +33,52 @@ export default class ChatWindow {
     this.renderMessages(messages);
   }
 
-  addMessage(messageObj) {
-    let tail = leftTail;
-    let tailClass = 'left_tail';
-    let msgClass = 'incoming';
-    let msgClassBg = 'incoming_bg';
-    if (this.userName === messageObj.author) {
-      tail = rightTail;
-      tailClass = 'right_tail';
-      msgClass = 'outgoing';
-      msgClassBg = 'outgoing_bg';
-    }
+  getClasses(author) {
+    const isMsgIncoming = author !== this.userName;
+    const isMsgFromSameAuthor = author === this.lastMsgUsername;
+    this.lastMsgUsername = author;
+    return {
+      tail: isMsgIncoming ? leftTail : rightTail,
+      tailClass: isMsgIncoming ? 'left_tail' : 'right_tail',
+      msgClass: isMsgIncoming ? 'incoming' : 'outgoing',
+      msgClassBg: isMsgIncoming ? 'incoming_bg' : 'outgoing_bg',
+      sameAuthorClass: isMsgFromSameAuthor ? 'continue_msg' : 'new_msg',
+    };
+  }
+
+  addMessage(messageObj, isFirstRender) {
+    const classesObj = this.getClasses(messageObj.author);
 
     const date = new Date(...messageObj.time);
-    const wrapper = create('div', `msg_wrapper ${msgClass}`, this.messagesWrapper);
-    const msg = create('div', `msg ${msgClassBg}`, wrapper);
-    const msgTail = create('img', `msg_tail ${tailClass}`, msg);
+    const wrapper = create('div', `msg_wrapper ${classesObj.msgClass}`, this.messagesWrapper);
+    const msg = create('div', `msg ${classesObj.msgClassBg} ${classesObj.sameAuthorClass}`, wrapper);
+    // if (nextUser !== messageObj.author) {
+    //   const msgTail = create('img', `msg_tail ${classesObj.tailClass}`, msg);
+    //   msgTail.setAttribute('src', classesObj.tail);
+    // }
+    const msgTail = create('img', `msg_tail ${classesObj.tailClass}`, msg);
+    msgTail.setAttribute('src', classesObj.tail);
     const msgInfo = create('div', 'msg_info_wrapper', msg);
     const msgContentWrapper = create('div', 'msg_content', msgInfo);
     const msgContent = create('span', 'msg_text', msgContentWrapper, ['textContent', messageObj.content]);
     const timeWrapper = create('div', 'msg_time_wrapper', msgInfo);
     const time = create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
-
-    msgTail.setAttribute('src', tail);
+    if (isFirstRender) {
+      wrapper.scrollIntoView();
+    } else {
+      wrapper.scrollIntoView({behavior: 'smooth'});
+    }
   }
 
-  renderMessages(messagesArr) {
-    const messages = messagesArr.reverse();
+  renderMessages(messages) {
     for (let i = 0; i < messages.length; i += 1) {
-      this.addMessage(messages[i]);
+      // if (messages[i + 1]) {
+      //   this.addMessage(messages[i], messages[i + 1].author);
+      // } else {
+      //   this.addMessage(messages[i]);
+      // }
+      this.addMessage(messages[i], true);
     }
+    this.lastMsgUsername = messages[0].author;
   }
 }

@@ -22,7 +22,7 @@ export default class UI {
     create('img', 'user_photo', userWrapper, ['src', defaultLogo]);
     const mainMenuWrapper = create('div', 'main_menu_wrapper', this.leftHeader);
     // create('div', 'status', mainMenuWrapper);
-    const newChat = create('div', 'menu_btn', mainMenuWrapper);
+    const newChat = create('div', 'menu_btn', mainMenuWrapper, ['id', 'new_chat']);
     create('img', 'new_chat_icon', newChat, ['src', newChatIcon]);
     const menu = create('div', 'menu_btn', mainMenuWrapper);
     create('img', 'menu_icon', menu, ['src', menuIcon]);

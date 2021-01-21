@@ -95,37 +95,18 @@ body::after {
           flex-direction: column;
 }
 
-.left_panel .main_header {
-  width: 100%;
-  height: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  background-color: #ededed;
-}
-
-.left_panel .main_header .main_user_photo_wrapper {
+.left_panel .main_user_photo_wrapper {
   width: 40px;
   height: 40px;
   padding: 10px 16px;
 }
 
-.left_panel .main_header .main_user_photo_wrapper .user_photo {
+.left_panel .main_user_photo_wrapper .user_photo {
   width: 40px;
   height: 40px;
 }
 
-.left_panel .main_header .main_menu_wrapper {
+.left_panel .main_menu_wrapper {
   padding: 10px 16px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -136,7 +117,7 @@ body::after {
           flex-direction: row;
 }
 
-.left_panel .main_header .main_menu_wrapper .menu_btn {
+.left_panel .main_menu_wrapper .menu_btn {
   width: 24px;
   height: 24px;
   padding: 6px;
@@ -257,6 +238,25 @@ body::after {
   background: #c4c4c4;
 }
 
+.main_header {
+  width: 100%;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #ededed;
+}
+
 .right_panel {
   height: 100%;
   display: -webkit-box;
@@ -310,9 +310,9 @@ body::after {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -330,7 +330,6 @@ body::after {
 .right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .msg {
   min-width: 95px;
   max-width: 90%;
-  margin-bottom: 12px;
   padding: 6px 7px 8px 9px;
   position: relative;
   display: -webkit-box;
@@ -413,6 +412,14 @@ body::after {
 .right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .outgoing_bg {
   background-color: #dcf8c6;
   border-top-right-radius: 0;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .new_msg {
+  margin-top: 12px;
+}
+
+.right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .continue_msg {
+  margin-top: 2px;
 }
 
 .right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .incoming {

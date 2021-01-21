@@ -10,10 +10,16 @@ import UI from './UI.js';
 const loggedInfo = get('logged');
 const userInterface = new UI();
 const chatList = new ChatList();
+const msgObj = {
+  time: [2020, 5, 25, 22, 5],
+  content: 'nrjycnsfdbfdb',
+  author: 'Serhgf',
+};
 
 function initMainWindow() {
   userInterface.init();
   chatList.init(get('logged')[0]);
+  document.getElementById('new_chat').addEventListener('click', () => chatList.chat.addMessage(msgObj));
 }
 
 document.body.addEventListener('login', () => initMainWindow());

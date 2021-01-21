@@ -60,38 +60,31 @@ body::after {
   display: flex;
   flex-direction: column;
 
-  .main_header {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ededed;
 
-    .main_user_photo_wrapper {
+
+  .main_user_photo_wrapper {
+    width: 40px;
+    height: 40px;
+    padding: 10px 16px;
+
+    .user_photo {
       width: 40px;
       height: 40px;
-      padding: 10px 16px;
-
-      .user_photo {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .main_menu_wrapper {
-      padding: 10px 16px;
-      display: flex;
-      flex-direction: row;
-
-      .menu_btn {
-        width: 24px;
-        height: 24px;
-        padding: 6px;
-      }
     }
   }
+
+  .main_menu_wrapper {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: row;
+
+    .menu_btn {
+      width: 24px;
+      height: 24px;
+      padding: 6px;
+    }
+  }
+
 
   .chat_search {
     width: 100%;
@@ -182,6 +175,16 @@ body::after {
   }
 }
 
+.main_header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ededed;
+}
+
 .right_panel {
   height: 100%;
   display: flex;
@@ -213,7 +216,7 @@ body::after {
 
       .msgs_wrapper {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         flex-grow: 1;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -225,7 +228,6 @@ body::after {
           .msg {
             min-width: 95px;
             max-width: 90%;
-            margin-bottom: 12px;
             padding: 6px 7px 8px 9px;
             position: relative;
             display: flex;
@@ -297,6 +299,15 @@ body::after {
           .outgoing_bg {
             background-color: rgb(220, 248, 198);
             border-top-right-radius: 0;
+          }
+
+          .new_msg {
+            margin-top: 12px;
+          }
+
+          .continue_msg {
+            margin-top: 2px;
+            // border-radius: 7.5px;
           }
         }
   
