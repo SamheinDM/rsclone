@@ -347,6 +347,60 @@ body::after {
     height: 62px;
     width: 100%;
     background-color: #ededed;
+
+    .input_wrapper {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .input_form {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .inner_input_wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-grow: 1;
+          border-radius: 22px;
+          background-color: white;
+
+          .msg_input {
+            width: 95%;
+            height: 20px;
+            margin-bottom: 2px;
+            border: none;
+          }
+
+          .msg_input::placeholder {
+            color: rgb(153, 153, 153);
+            font-size: 15px;
+          }
+  
+          .msg_input:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+          }
+        }
+
+        .msg_input_btn {
+          width: 44px;
+          height: 44px;
+          margin: 0 10px;
+          border: none;
+          cursor: pointer;
+          outline: none;
+        }
+
+        .msg_input_btn:active {
+          outline: none;
+        }
+      }
+    }
   }
 }
 

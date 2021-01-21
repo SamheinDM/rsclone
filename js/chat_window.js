@@ -2,6 +2,7 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import leftTail from '../assets/left_tail.svg';
 import rightTail from '../assets/right_tail.svg';
+import inputIcon from '../assets/input_btn.svg';
 import create from './utils/create';
 import { getMessageDate, getTime } from './utils/get_date.js';
 import { get } from './utils/storage';
@@ -20,6 +21,18 @@ export default class ChatWindow {
     this.lastDate = null;
   }
 
+  createFooter() {
+    this.footer = create('footer', 'chat_footer', this.mainChatWrapper);
+    const inputWrapper = create('div', 'input_wrapper', this.footer);
+    const inputForm = create('form', 'input_form', inputWrapper);
+    const innerInputWrapper = create('div', 'inner_input_wrapper', inputForm);
+    const input = create('input', 'msg_input', innerInputWrapper);
+    const inputBtn = create('button', 'msg_input_btn', inputForm);
+    create('img', 'input_btn_img', inputBtn, ['src', inputIcon]);
+
+    input.setAttribute('placeholder', 'Введите сообщение');
+  }
+
   init(messages) {
     [this.userName] = get('logged');
     this.mainChatWrapper = document.getElementById('chat_panel');
@@ -33,7 +46,8 @@ export default class ChatWindow {
     create('div', 'chat_bg', this.chatWrapper);
     this.msgsAreaWrapper = create('div', 'msgs_area_wrapper', this.chatWrapper);
     this.messagesWrapper = create('div', 'msgs_wrapper', this.msgsAreaWrapper);
-    this.footer = create('footer', 'chat_footer', this.mainChatWrapper);
+
+    this.createFooter();
 
     this.renderMessages(messages);
   }
