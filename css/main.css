@@ -420,6 +420,7 @@ body::after {
 
 .right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .msg_wrapper .continue_msg {
   margin-top: 2px;
+  border-radius: 7.5px;
 }
 
 .right_panel .chat_wrapper .msgs_area_wrapper .msgs_wrapper .incoming {
