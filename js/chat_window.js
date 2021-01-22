@@ -51,6 +51,9 @@ export default class ChatWindow {
 
   init(messages) {
     [this.userName] = get('logged');
+    this.lastMsgUsername = null;
+    this.lastMsg = null;
+    this.lastDate = null;
     this.mainChatWrapper = document.getElementById('chat_panel');
     if (this.mainChatWrapper.hasChildNodes()) {
       while (this.mainChatWrapper.firstChild) {

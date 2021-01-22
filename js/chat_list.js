@@ -31,7 +31,6 @@ export default class ChatList {
       clikeedChatElement.classList.toggle('chat_element_active');
 
       this.chat.init(this.getMessagesFromChat(clikeedChatElement));
-      // this.chat.renderMessages(this.getMessagesFromChat(e));
     }
   }
 
