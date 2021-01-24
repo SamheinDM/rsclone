@@ -43,6 +43,7 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "prelude-ls": "^1.2.1",
+    "socket.io": "^3.1.0",
     "svg-url-loader": "^7.1.1"
   }
 }

@@ -1,5 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
+import io from './utils/socket.io.js';
+
 const NetAPI = (function () {
   const tempInfo = [{
     name: 'Serhgf',
@@ -191,28 +193,46 @@ const NetAPI = (function () {
       author: 'a',
     }],
   }];
-  let chatInfo;
+  let chatInfo = null;
 
-  const getChatInfo = (user) => {
+  let serverInfo = null;
+
+  const socket = io.connect('ws://localhost:3000');
+
+  socket.on('connect', () => {
+    console.log(socket.connected); // true
+  });
+
+  socket.on('recieveInfo', (data) => {
+    serverInfo = data;
+    console.log(serverInfo);
+  });
+
+  function connect(info) {
+    socket.emit('requestInfo', info);
+  }
+
+  function getChatInfo(user) {
     if (!chatInfo) {
       chatInfo = tempInfo;
     }
-  };
+  }
 
-  const getChatList = (user) => {
-    getChatInfo();
+  function getChatList(user) {
+    getChatInfo(user);
     return chatInfo;
-  };
+  }
 
-  const authentication = (login, password) => {
+  function authentication(login, password) {
     if (login === 'a' && password === 's') {
       document.body.dispatchEvent(new Event('login'));
       return true;
     }
     return false;
-  };
+  }
 
   return {
+    connect,
     getChatList,
     authentication,
   };

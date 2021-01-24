@@ -19,7 +19,7 @@ const msgObj = {
 function initMainWindow() {
   userInterface.init();
   chatList.init(get('logged')[0]);
-  document.getElementById('new_chat').addEventListener('click', () => chatList.chat.addMessage(msgObj));
+  document.getElementById('new_chat').addEventListener('click', () => NetAPI.connect('a'));
 }
 
 document.body.addEventListener('login', () => initMainWindow());
