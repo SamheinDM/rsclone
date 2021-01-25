@@ -209,7 +209,7 @@ const NetAPI = (function () {
   });
 
   function connect(info) {
-    socket.emit('requestInfo', info);
+    socket.emit('message', info);
   }
 
   function getChatInfo(user) {
