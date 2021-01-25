@@ -197,7 +197,7 @@ const NetAPI = (function () {
 
   let serverInfo = null;
 
-  const socket = io.connect('ws://localhost:3000');
+  const socket = io.connect('http://localhost:3000');
 
   socket.on('connect', () => {
     console.log(socket.connected); // true
