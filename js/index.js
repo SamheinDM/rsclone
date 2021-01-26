@@ -11,15 +11,22 @@ const loggedInfo = get('logged');
 const userInterface = new UI();
 const chatList = new ChatList();
 const msgObj = {
-  // time: new Date(...[2020, 5, 25, 22, 5]),
+  chatID: 'fdfc2425-1ebf-43fb-a414-d0e88c5d2ae0',
   message: 'nrjycnsfdbfdb',
-  user: 'Serhgf',
+  fromID: 'Serhgf',
+  toID: 'asgbdfb',
+};
+
+const userObj = {
+  login: 'test',
+  password: 'goodPassword',
 };
 
 function initMainWindow() {
   userInterface.init();
   chatList.init(get('logged')[0]);
-  document.getElementById('new_chat').addEventListener('click', () => NetAPI.connect(msgObj));
+  // document.getElementById('new_chat').addEventListener('click', () => NetAPI.connect(msgObj));
+  document.getElementById('new_chat').addEventListener('click', () => NetAPI.registration(userObj));
 }
 
 document.body.addEventListener('login', () => initMainWindow());

@@ -2,6 +2,16 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import io from './utils/socket.io.js';
 
+const socket = io.connect('http://localhost:3000');
+
+socket.on('connect', () => {
+  console.log(socket.connected); // true
+});
+
+socket.on('registered', (data) => {
+  console.log(data);
+});
+
 const NetAPI = (function () {
   const tempInfo = [{
     name: 'Serhgf',
@@ -197,19 +207,12 @@ const NetAPI = (function () {
 
   let serverInfo = null;
 
-  const socket = io.connect('http://localhost:3000');
-
-  socket.on('connect', () => {
-    console.log(socket.connected); // true
-  });
-
-  socket.on('recieveInfo', (data) => {
-    serverInfo = data;
-    console.log(serverInfo);
-  });
-
   function connect(info) {
     socket.emit('message', info);
+  }
+
+  function registration(info) {
+    socket.emit('registration', info);
   }
 
   function getChatInfo(user) {
@@ -233,6 +236,7 @@ const NetAPI = (function () {
 
   return {
     connect,
+    registration,
     getChatList,
     authentication,
   };
