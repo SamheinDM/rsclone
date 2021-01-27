@@ -21,7 +21,6 @@ export default class UI {
     const userWrapper = create('div', 'main_user_photo_wrapper', this.leftHeader);
     create('img', 'user_photo', userWrapper, ['src', defaultLogo]);
     const mainMenuWrapper = create('div', 'main_menu_wrapper', this.leftHeader);
-    // create('div', 'status', mainMenuWrapper);
     const newChat = create('div', 'menu_btn', mainMenuWrapper, ['id', 'new_chat']);
     create('img', 'new_chat_icon', newChat, ['src', newChatIcon]);
     const menu = create('div', 'menu_btn', mainMenuWrapper);

@@ -20,7 +20,7 @@ export default class ChatList {
     return this.chatList[indexOfClickedChat].messages;
   }
 
-  clickOnChat = (e) => {
+  clickOnChat = (e, login) => {
     e.preventDefault();
     const clikeedChatElement = e.target.closest('.chat_element');
     if (clikeedChatElement) {
@@ -30,25 +30,23 @@ export default class ChatList {
       }
       clikeedChatElement.classList.toggle('chat_element_active');
 
-      this.chat.init(this.getMessagesFromChat(clikeedChatElement));
+      this.chat.init(this.getMessagesFromChat(clikeedChatElement), login);
     }
   }
 
-  sortByDate(a, b) {
-    let firstDate = a.messages[a.messages.length - 1].time;
-    let secondDate = b.messages[b.messages.length - 1].time;
-    firstDate = new Date(firstDate);
-    secondDate = new Date(secondDate);
-    return secondDate - firstDate;
-  }
-
   sortChatList(list) {
-    return list.sort(this.sortByDate);
+    return list.sort((a, b) => {
+      let firstDate = a.messages[a.messages.length - 1].time;
+      let secondDate = b.messages[b.messages.length - 1].time;
+      firstDate = new Date(firstDate);
+      secondDate = new Date(secondDate);
+      return secondDate - firstDate;
+    });
   }
 
-  init(username) {
+  init(localDB) {
     this.mainPanel = document.getElementById('main_panel');
-    this.chatList = NetAPI.getChatList(username);
+    this.chatList = localDB.chats;
     this.chatList = this.sortChatList(this.chatList);
     this.chatListWrapper = create('div', 'chat_list_wrapper', this.mainPanel);
 
@@ -64,12 +62,12 @@ export default class ChatList {
 
       const msgInfoWrapper = create('div', 'msg_info_wrapper', wrapper);
       const infoWrapper = create('div', 'info_wrapper', msgInfoWrapper);
-      create('span', 'chat_list_user_name', infoWrapper, ['textContent', this.chatList[i].name]);
+      create('span', 'chat_list_user_name', infoWrapper, ['textContent', this.chatList[i].from]);
       create('span', 'chat_list_last_date', infoWrapper, ['textContent', getChatDate(date)]);
 
       const lastMsgWrapper = create('div', 'last_msg_wrapper', msgInfoWrapper);
-      create('span', 'last_msg', lastMsgWrapper, ['textContent', lastMessage.content]);
+      create('span', 'last_msg', lastMsgWrapper, ['textContent', lastMessage.message]);
     }
-    this.chatListWrapper.addEventListener('click', this.clickOnChat);
+    this.chatListWrapper.addEventListener('click', (e) => this.clickOnChat(e, localDB.user.login));
   }
 }

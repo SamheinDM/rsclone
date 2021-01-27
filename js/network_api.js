@@ -2,17 +2,13 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import io from './utils/socket.io.js';
 
-const socket = io.connect('http://localhost:3000');
-
-socket.on('connect', () => {
-  console.log(socket.connected); // true
-});
-
-socket.on('registered', (data) => {
-  console.log(data);
-});
+// socket.on('connect', () => {
+//   console.log(socket.connected);
+// });
 
 const NetAPI = (function () {
+  const socket = io.connect('http://localhost:3000');
+
   const tempInfo = [{
     name: 'Serhgf',
     messages: [{
@@ -205,9 +201,7 @@ const NetAPI = (function () {
   }];
   let chatInfo = null;
 
-  let serverInfo = null;
-
-  function connect(info) {
+  function sendMessage(info) {
     socket.emit('message', info);
   }
 
@@ -235,7 +229,8 @@ const NetAPI = (function () {
   }
 
   return {
-    connect,
+    socket,
+    sendMessage,
     registration,
     getChatList,
     authentication,

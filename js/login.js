@@ -1,10 +1,8 @@
 /* eslint-disable import/extensions */
 /* eslint linebreak-style: ["error", "windows"] */
+// import { even } from 'prelude-ls';
 import create from './utils/create.js';
 import NetAPI from './network_api.js';
-import { set } from './utils/storage.js';
-import { even } from 'prelude-ls';
-import ChatList from './chat_list.js';
 
 export default class Login {
   constructor() {
@@ -13,6 +11,11 @@ export default class Login {
     this.errorMsg = null;
     this.loginInput = null;
     this.passwordInput = null;
+    this.passwordInputAgain = null;
+  }
+
+  createErrMsg(text) {
+    this.errorMsg = create('span', 'login_error_msg', this.wrapper, ['textContent', text]);
   }
 
   removeErrMsg() {
@@ -22,16 +25,19 @@ export default class Login {
     }
   }
 
+  submitRegistration(event) {
+    event.preventDefault();
+    this.removeErrMsg();
+    if (this.passwordInput.value === this.passwordInputAgain.value) {
+      NetAPI.registration(this.loginInput.value, this.passwordInput.value);
+    } else {
+      this.createErrMsg('Пароли не совпадают.');
+    }
+  }
+
   submitLogin(event) {
     event.preventDefault();
-    const result = NetAPI.authentication(this.loginInput.value, this.passwordInput.value);
-    if (result) {
-      this.body.removeChild(this.wrapper);
-      set('logged', [this.loginInput.value, this.passwordInput.value]);
-    } else {
-      this.removeErrMsg();
-      this.errorMsg = create('span', 'login_error_msg', this.wrapper, ['textContent', 'Login or password is not correct.']);
-    }
+    NetAPI.authentication(this.loginInput.value, this.passwordInput.value);
   }
 
   clearLoginScreen() {
@@ -57,7 +63,7 @@ export default class Login {
       ['type', 'password'],
       ['autocomplete', 'new-password']);
     create('label', 'login_label', form, ['for', 'pass_reg_rep_input'], ['textContent', 'Повторите пароль: ']);
-    this.passwordInput = create('input', 'login_input', form,
+    this.passwordInputAgain = create('input', 'login_input', form,
       ['id', 'pass_reg_rep_input'],
       ['required', true],
       ['type', 'password'],
@@ -66,6 +72,13 @@ export default class Login {
     const regBtn = create('button', 'login_btn', btnWrapper, ['type', 'submit'], ['textContent', 'Зарегестрироваться']);
     const cancelBtn = create('button', 'login_btn', btnWrapper, ['textContent', 'Отмена']);
 
+    this.loginInput.onfocus = () => this.removeErrMsg();
+    this.passwordInput.onfocus = () => this.removeErrMsg();
+    this.passwordInputAgain.onfocus = () => this.removeErrMsg();
+
+    form.onsubmit = (e) => this.submitRegistration(e);
+
+    regBtn.addEventListener('click', (e) => e.preventDefault);
     cancelBtn.addEventListener('click', () => this.init());
   }
 

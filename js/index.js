@@ -4,38 +4,30 @@ import '../css/main.css';
 import NetAPI from './network_api.js';
 import ChatList from './chat_list.js';
 import Login from './login.js';
-import { get } from './utils/storage.js';
 import UI from './UI.js';
 
-const loggedInfo = get('logged');
 const userInterface = new UI();
 const chatList = new ChatList();
-const msgObj = {
-  chatID: 'fdfc2425-1ebf-43fb-a414-d0e88c5d2ae0',
-  message: 'nrjycnsfdbfdb',
-  fromID: 'Serhgf',
-  toID: 'asgbdfb',
-};
+const login = new Login();
+login.init();
 
-const userObj = {
-  login: 'test',
-  password: 'goodPassword',
-};
+let localDB;
 
 function initMainWindow() {
-  userInterface.init();
-  chatList.init(get('logged')[0]);
-  // document.getElementById('new_chat').addEventListener('click', () => NetAPI.connect(msgObj));
-  document.getElementById('new_chat').addEventListener('click', () => NetAPI.registration(userObj));
+  userInterface.init(localDB.user);
+  chatList.init(localDB);
 }
 
 document.body.addEventListener('login', () => initMainWindow());
 
-if (loggedInfo) {
-  const isAuthorized = NetAPI.authentication(loggedInfo[0], loggedInfo[1]);
-  if (!isAuthorized) {
-    new Login().init();
+NetAPI.socket.on('registration', login.createErrMsg('Такой пользователь уже существует.'));
+NetAPI.socket.on('authorise', (data) => {
+  if (data) {
+    localDB = data;
+    document.body.removeChild(login.wrapper);
+    document.body.dispatchEvent(new Event('login'));
+  } else {
+    login.removeErrMsg();
+    login.createErrMsg('Неверный логин/пароль.');
   }
-} else {
-  new Login().init();
-}
+});
