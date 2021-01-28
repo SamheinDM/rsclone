@@ -15,6 +15,7 @@ export default class Login {
   }
 
   createErrMsg(text) {
+    console.log('twxt');
     this.errorMsg = create('span', 'login_error_msg', this.wrapper, ['textContent', text]);
   }
 

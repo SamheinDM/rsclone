@@ -4,10 +4,12 @@ import leftTail from '../assets/left_tail.svg';
 import rightTail from '../assets/right_tail.svg';
 import inputIcon from '../assets/input_btn.svg';
 import create from './utils/create';
+import NetAPI from './network_api.js';
 import { getMessageDate, getTime } from './utils/get_date.js';
 
 export default class ChatWindow {
   constructor() {
+    this.chatID = null;
     this.mainChatWrapper = null;
     this.header = null;
     this.chatWrapper = null;
@@ -25,9 +27,13 @@ export default class ChatWindow {
     create('span', 'time_msg_text', wrapper, ['textContent', getMessageDate(date)]);
   }
 
-  addMessage(messageObj, isFirstRender) {
-    const classesObj = this.getClasses(messageObj.from);
+  addMessageToLocalDB(messageObj) {
+    global.localDB.chats.find((elem) => elem.id === this.chatID).messages.push(messageObj);
+    document.body.dispatchEvent(new Event('new_message'));
+  }
 
+  addMessage = (messageObj, isFirstRender) => {
+    const classesObj = this.getClasses(messageObj.from);
     const date = new Date(messageObj.time);
     if (!this.lastDate || date.toDateString() !== this.lastDate.toDateString()) {
       this.addDateMessage(date);
@@ -49,6 +55,7 @@ export default class ChatWindow {
       wrapper.scrollIntoView();
     } else {
       wrapper.scrollIntoView({ behavior: 'smooth' });
+      this.addMessageToLocalDB(messageObj);
     }
   }
 
@@ -61,7 +68,7 @@ export default class ChatWindow {
     };
     input.value = '';
 
-    this.addMessage(msgObj);
+    NetAPI.sendMessage(msgObj, this.chatID);
   }
 
   getClasses(author) {
@@ -97,10 +104,12 @@ export default class ChatWindow {
     for (let i = 0; i < messages.length; i += 1) {
       this.addMessage(messages[i], true);
     }
-    this.lastMsgUsername = messages[0].from;
+    this.lastMsgUsername = messages[messages.length - 1].from;
   }
 
-  init(messages, login) {
+  init(messagesObj, login) {
+    const { messages } = messagesObj;
+    this.chatID = messagesObj.ID;
     this.userName = login;
     this.lastMsgUsername = null;
     this.lastMsg = null;
@@ -120,5 +129,6 @@ export default class ChatWindow {
     this.createFooter();
 
     this.renderMessages(messages);
+    NetAPI.socket.on('message', (newMsg) => this.addMessage(newMsg));
   }
 }

@@ -11,24 +11,18 @@ const chatList = new ChatList();
 const login = new Login();
 login.init();
 
-let localDB = {};
+global.localDB = {};
 
 function initMainWindow() {
-  userInterface.init(localDB.user);
-  chatList.init(localDB);
+  userInterface.init(global.localDB.user);
+  if (global.localDB.chats) {
+    chatList.init(global.localDB);
+  }
 }
 
 document.body.addEventListener('login', () => initMainWindow());
+document.body.addEventListener('new_message', () => chatList.init(global.localDB));
 
 NetAPI.regResponse(login);
 
-NetAPI.socket.on('authorise', (data) => {
-  if (data) {
-    localDB = data;
-    document.body.removeChild(login.wrapper);
-    document.body.dispatchEvent(new Event('login'));
-  } else {
-    login.removeErrMsg();
-    login.createErrMsg('Неверный логин/пароль.');
-  }
-});
+NetAPI.authResponse(login);

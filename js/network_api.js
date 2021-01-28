@@ -196,16 +196,12 @@ const NetAPI = (function () {
     }],
   }];
 
-  function sendMessage(info) {
-    socket.emit('message', info);
-  }
-
   function registration(info) {
     socket.emit('registration', info);
   }
 
   function regResponse(login) {
-    socket.on('registration', login.createErrMsg('Такой пользователь уже существует.'));
+    socket.on('registration', () => login.createErrMsg('Такой пользователь уже существует.'));
   }
 
   function authentication(login, password) {
@@ -215,6 +211,7 @@ const NetAPI = (function () {
   function authResponse(login) {
     socket.on('authorise', (data) => {
       if (data) {
+        global.localDB = data;
         document.body.removeChild(login.wrapper);
         document.body.dispatchEvent(new Event('login'));
       } else {
@@ -224,8 +221,13 @@ const NetAPI = (function () {
     });
   }
 
+  function sendMessage(messageObj, chatID) {
+    socket.emit('message', { messageObj, chatID });
+  }
+
   return {
     socket,
+    authResponse,
     sendMessage,
     registration,
     regResponse,

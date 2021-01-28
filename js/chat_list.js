@@ -3,7 +3,6 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import defaultLogo from '../assets/default_user.svg';
 import create from './utils/create.js';
-import NetAPI from './network_api.js';
 import ChatWindow from './chat_window';
 import { getChatDate } from './utils/get_date.js';
 
@@ -17,7 +16,10 @@ export default class ChatList {
 
   getMessagesFromChat(chatEl) {
     const indexOfClickedChat = chatEl.dataset.index;
-    return this.chatList[indexOfClickedChat].messages;
+    return {
+      messages: this.chatList[indexOfClickedChat].messages,
+      ID: this.chatList[indexOfClickedChat].id,
+    };
   }
 
   clickOnChat = (e, login) => {
@@ -29,7 +31,6 @@ export default class ChatList {
         chatListArr[i].classList.remove('chat_element_active');
       }
       clikedChatElement.classList.toggle('chat_element_active');
-
       this.chat.init(this.getMessagesFromChat(clikedChatElement), login);
     }
   }
@@ -46,6 +47,11 @@ export default class ChatList {
 
   init(localDB) {
     this.mainPanel = document.getElementById('main_panel');
+
+    if (this.chatListWrapper) {
+      this.mainPanel.removeChild(this.chatListWrapper);
+    }
+
     this.chatList = localDB.chats;
     this.chatList = this.sortChatList(this.chatList);
     this.chatListWrapper = create('div', 'chat_list_wrapper', this.mainPanel);
