@@ -11,7 +11,7 @@ const chatList = new ChatList();
 const login = new Login();
 login.init();
 
-let localDB;
+let localDB = {};
 
 function initMainWindow() {
   userInterface.init(localDB.user);
@@ -20,7 +20,8 @@ function initMainWindow() {
 
 document.body.addEventListener('login', () => initMainWindow());
 
-NetAPI.socket.on('registration', login.createErrMsg('Такой пользователь уже существует.'));
+NetAPI.regResponse(login);
+
 NetAPI.socket.on('authorise', (data) => {
   if (data) {
     localDB = data;

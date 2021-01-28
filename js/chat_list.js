@@ -22,15 +22,15 @@ export default class ChatList {
 
   clickOnChat = (e, login) => {
     e.preventDefault();
-    const clikeedChatElement = e.target.closest('.chat_element');
-    if (clikeedChatElement) {
+    const clikedChatElement = e.target.closest('.chat_element');
+    if (clikedChatElement) {
       const chatListArr = document.querySelectorAll('.chat_element');
       for (let i = 0; i < chatListArr.length; i += 1) {
         chatListArr[i].classList.remove('chat_element_active');
       }
-      clikeedChatElement.classList.toggle('chat_element_active');
+      clikedChatElement.classList.toggle('chat_element_active');
 
-      this.chat.init(this.getMessagesFromChat(clikeedChatElement), login);
+      this.chat.init(this.getMessagesFromChat(clikedChatElement), login);
     }
   }
 
@@ -62,7 +62,7 @@ export default class ChatList {
 
       const msgInfoWrapper = create('div', 'msg_info_wrapper', wrapper);
       const infoWrapper = create('div', 'info_wrapper', msgInfoWrapper);
-      create('span', 'chat_list_user_name', infoWrapper, ['textContent', this.chatList[i].from]);
+      create('span', 'chat_list_user_name', infoWrapper, ['textContent', messages[i].from]);
       create('span', 'chat_list_last_date', infoWrapper, ['textContent', getChatDate(date)]);
 
       const lastMsgWrapper = create('div', 'last_msg_wrapper', msgInfoWrapper);

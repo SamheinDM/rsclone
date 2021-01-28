@@ -2,10 +2,6 @@
 /* eslint linebreak-style: ["error", "windows"] */
 import io from './utils/socket.io.js';
 
-// socket.on('connect', () => {
-//   console.log(socket.connected);
-// });
-
 const NetAPI = (function () {
   const socket = io.connect('http://localhost:3000');
 
@@ -199,7 +195,6 @@ const NetAPI = (function () {
       author: 'a',
     }],
   }];
-  let chatInfo = null;
 
   function sendMessage(info) {
     socket.emit('message', info);
@@ -209,30 +204,31 @@ const NetAPI = (function () {
     socket.emit('registration', info);
   }
 
-  function getChatInfo(user) {
-    if (!chatInfo) {
-      chatInfo = tempInfo;
-    }
-  }
-
-  function getChatList(user) {
-    getChatInfo(user);
-    return chatInfo;
+  function regResponse(login) {
+    socket.on('registration', login.createErrMsg('Такой пользователь уже существует.'));
   }
 
   function authentication(login, password) {
-    if (login === 'a' && password === 's') {
-      document.body.dispatchEvent(new Event('login'));
-      return true;
-    }
-    return false;
+    socket.emit('authentication', { login, password });
+  }
+
+  function authResponse(login) {
+    socket.on('authorise', (data) => {
+      if (data) {
+        document.body.removeChild(login.wrapper);
+        document.body.dispatchEvent(new Event('login'));
+      } else {
+        login.removeErrMsg();
+        login.createErrMsg('Неверный логин/пароль.');
+      }
+    });
   }
 
   return {
     socket,
     sendMessage,
     registration,
-    getChatList,
+    regResponse,
     authentication,
   };
 }());

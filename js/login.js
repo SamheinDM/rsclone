@@ -29,7 +29,7 @@ export default class Login {
     event.preventDefault();
     this.removeErrMsg();
     if (this.passwordInput.value === this.passwordInputAgain.value) {
-      NetAPI.registration(this.loginInput.value, this.passwordInput.value);
+      NetAPI.registration({ login: this.loginInput.value, password: this.passwordInput.value });
     } else {
       this.createErrMsg('Пароли не совпадают.');
     }

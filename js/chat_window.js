@@ -42,9 +42,9 @@ export default class ChatWindow {
     }
     const msgInfo = create('div', 'msg_info_wrapper', msg);
     const msgContentWrapper = create('div', 'msg_content', msgInfo);
-    const msgContent = create('span', 'msg_text', msgContentWrapper, ['textContent', messageObj.message]);
+    create('span', 'msg_text', msgContentWrapper, ['textContent', messageObj.message]);
     const timeWrapper = create('div', 'msg_time_wrapper', msgInfo);
-    const time = create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
+    create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
     if (isFirstRender) {
       wrapper.scrollIntoView();
     } else {
@@ -57,8 +57,7 @@ export default class ChatWindow {
     const input = document.getElementById('msg_input');
     const msgObj = {
       from: this.userName,
-      time: new Date(Date.now()),
-      content: input.value,
+      message: input.value,
     };
     input.value = '';
 
@@ -98,7 +97,7 @@ export default class ChatWindow {
     for (let i = 0; i < messages.length; i += 1) {
       this.addMessage(messages[i], true);
     }
-    this.lastMsgUsername = messages[0].author;
+    this.lastMsgUsername = messages[0].from;
   }
 
   init(messages, login) {
