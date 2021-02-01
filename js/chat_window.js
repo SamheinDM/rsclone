@@ -20,6 +20,7 @@ export default class ChatWindow {
     this.lastMsgUsername = null;
     this.lastMsg = null;
     this.lastDate = null;
+    NetAPI.socket.on('message', (newMsg) => this.addMessage(newMsg));
   }
 
   addDateMessage(date) {
@@ -33,42 +34,48 @@ export default class ChatWindow {
   }
 
   addMessage = (messageObj, isFirstRender) => {
-    const classesObj = this.getClasses(messageObj.from);
-    const date = new Date(messageObj.time);
-    if (!this.lastDate || date.toDateString() !== this.lastDate.toDateString()) {
-      this.addDateMessage(date);
-    }
-    this.lastDate = date;
-
-    const wrapper = create('div', `msg_wrapper ${classesObj.msgClass}`, this.messagesWrapper);
-    const msg = create('div', `msg ${classesObj.msgClassBg} ${classesObj.sameAuthorClass}`, wrapper);
-    if (!classesObj.sameAuthor) {
-      const msgTail = create('img', `msg_tail ${classesObj.tailClass}`, msg);
-      msgTail.setAttribute('src', classesObj.tail);
-    }
-    const msgInfo = create('div', 'msg_info_wrapper', msg);
-    const msgContentWrapper = create('div', 'msg_content', msgInfo);
-    create('span', 'msg_text', msgContentWrapper, ['textContent', messageObj.message]);
-    const timeWrapper = create('div', 'msg_time_wrapper', msgInfo);
-    create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
-    if (isFirstRender) {
-      wrapper.scrollIntoView();
+    if (messageObj.message === '') {
+      document.body.dispatchEvent(new Event('new_message'));
     } else {
-      wrapper.scrollIntoView({ behavior: 'smooth' });
-      this.addMessageToLocalDB(messageObj);
+      const classesObj = this.getClasses(messageObj.from);
+      const date = new Date(messageObj.time);
+      if (!this.lastDate || date.toDateString() !== this.lastDate.toDateString()) {
+        this.addDateMessage(date);
+      }
+      this.lastDate = date;
+
+      const wrapper = create('div', `msg_wrapper ${classesObj.msgClass}`, this.messagesWrapper);
+      const msg = create('div', `msg ${classesObj.msgClassBg} ${classesObj.sameAuthorClass}`, wrapper);
+      if (!classesObj.sameAuthor) {
+        const msgTail = create('img', `msg_tail ${classesObj.tailClass}`, msg);
+        msgTail.setAttribute('src', classesObj.tail);
+      }
+      const msgInfo = create('div', 'msg_info_wrapper', msg);
+      const msgContentWrapper = create('div', 'msg_content', msgInfo);
+      create('span', 'msg_text', msgContentWrapper, ['textContent', messageObj.message]);
+      const timeWrapper = create('div', 'msg_time_wrapper', msgInfo);
+      create('span', 'msg_time', timeWrapper, ['textContent', getTime(date)]);
+      if (isFirstRender) {
+        wrapper.scrollIntoView();
+      } else {
+        wrapper.scrollIntoView({ behavior: 'smooth' });
+        this.addMessageToLocalDB(messageObj);
+      }
     }
   }
 
   createNewMessage(e) {
     e.preventDefault();
     const input = document.getElementById('msg_input');
-    const msgObj = {
-      from: this.userName,
-      message: input.value,
-    };
-    input.value = '';
+    if (input.value) {
+      const msgObj = {
+        from: this.userName,
+        message: input.value,
+      };
+      input.value = '';
 
-    NetAPI.sendMessage(msgObj, this.chatID);
+      NetAPI.sendMessage(msgObj, this.chatID);
+    }
   }
 
   getClasses(author) {
@@ -104,7 +111,9 @@ export default class ChatWindow {
     for (let i = 0; i < messages.length; i += 1) {
       this.addMessage(messages[i], true);
     }
-    this.lastMsgUsername = messages[messages.length - 1].from;
+    if (!messages[messages.length - 1].from) {
+      this.lastMsgUsername = messages[messages.length - 1].from;
+    }
   }
 
   init(messagesObj, login) {
@@ -129,6 +138,5 @@ export default class ChatWindow {
     this.createFooter();
 
     this.renderMessages(messages);
-    NetAPI.socket.on('message', (newMsg) => this.addMessage(newMsg));
   }
 }

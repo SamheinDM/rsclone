@@ -41,6 +41,8 @@ body::after {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  overflow: hidden;
   background-color: #e7e7e7;
   -webkit-box-shadow: 0px 0px 6px #acacac;
           box-shadow: 0px 0px 6px #acacac;
@@ -82,6 +84,117 @@ body::after {
   width: 90px;
 }
 
+.side_menu_wrapper {
+  width: 30%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -30%;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  -webkit-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+.side_menu_wrapper .side_menu_header {
+  height: 108px;
+  padding-right: 20px;
+  padding-left: 23px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #00bfa5;
+}
+
+.side_menu_wrapper .side_menu_header .smh_content_wrapper {
+  width: 100%;
+  height: 59px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.side_menu_wrapper .side_menu_header .smh_content_wrapper .smh_back_button {
+  margin-right: 29px;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+}
+
+.side_menu_wrapper .side_menu_header .smh_content_wrapper .smh_back_button .back_btn_img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.side_menu_wrapper .side_menu_header .smh_content_wrapper .smh_back_button:active {
+  outline: none;
+}
+
+.side_menu_wrapper .side_menu_header .smh_content_wrapper .smh_text_wrapper {
+  margin-top: -3px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-weight: 500;
+  font-size: 19px;
+  color: white;
+}
+
+.side_menu_wrapper .smh_search_wrapper {
+  width: 100%;
+  height: 49px;
+  background-color: #faf5f5;
+}
+
+.menu_open {
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  -webkit-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
 .left_panel {
   height: 100%;
   width: 30%;
@@ -121,6 +234,7 @@ body::after {
   width: 24px;
   height: 24px;
   padding: 6px;
+  cursor: pointer;
 }
 
 .left_panel .chat_search {
@@ -130,15 +244,16 @@ body::after {
   background-color: #faf5f5;
 }
 
-.left_panel .chat_list_wrapper {
+.chat_list_wrapper {
   width: 100%;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.left_panel .chat_list_wrapper .chat_element {
+.chat_list_wrapper .chat_element {
   height: 72px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -160,13 +275,13 @@ body::after {
   cursor: pointer;
 }
 
-.left_panel .chat_list_wrapper .chat_element .user_photo_wrapper {
+.chat_list_wrapper .chat_element .user_photo_wrapper {
   height: 49px;
   width: 49px;
   padding: 0 15px;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper {
+.chat_list_wrapper .chat_element .msg_info_wrapper {
   height: 100%;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -183,7 +298,7 @@ body::after {
           justify-content: center;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper {
+.chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper {
   padding-bottom: 3px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -193,49 +308,53 @@ body::after {
           justify-content: space-between;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper .chat_list_user_name {
+.chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper .chat_list_user_name {
   font-size: 17px;
   font-weight: 500;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper .chat_list_last_date {
+.chat_list_wrapper .chat_element .msg_info_wrapper .info_wrapper .chat_list_last_date {
   padding-right: 15px;
   font-size: 12px;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper {
+.chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper {
   width: 320px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper .last_msg {
+.chat_list_wrapper .chat_element .msg_info_wrapper .last_msg_wrapper .last_msg {
   font-size: 14px;
 }
 
-.left_panel .chat_list_wrapper .chat_element .msg_info_wrapper:nth-child(n+2) {
+.chat_list_wrapper .chat_element .msg_info_wrapper:nth-child(n+2) {
   border-top: 1px solid #f1f1f1;
 }
 
-.left_panel .chat_list_wrapper .chat_element:hover {
+.chat_list_wrapper .chat_element:hover {
   background-color: #ededed;
 }
 
-.left_panel .chat_list_wrapper .chat_element_active {
+.chat_list_wrapper .chat_element_active {
   background-color: #dadada;
 }
 
-.left_panel .chat_list_wrapper .chat_element_active:hover {
+.chat_list_wrapper .chat_element_active:hover {
   background-color: #dadada;
 }
 
-.left_panel .chat_list_wrapper::-webkit-scrollbar {
+.chat_list_wrapper::-webkit-scrollbar {
   width: 6px;
 }
 
-.left_panel .chat_list_wrapper::-webkit-scrollbar-thumb {
+.chat_list_wrapper::-webkit-scrollbar-thumb {
   background: #c4c4c4;
+}
+
+.chat_list_wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .main_header {

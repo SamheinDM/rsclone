@@ -221,6 +221,10 @@ const NetAPI = (function () {
     });
   }
 
+  function createChat(usersArray) {
+    socket.emit('create_chat', usersArray);
+  }
+
   function sendMessage(messageObj, chatID) {
     socket.emit('message', { messageObj, chatID });
   }
@@ -228,6 +232,7 @@ const NetAPI = (function () {
   return {
     socket,
     authResponse,
+    createChat,
     sendMessage,
     registration,
     regResponse,
