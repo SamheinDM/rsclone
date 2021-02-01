@@ -14,9 +14,8 @@ export default class UI {
     this.leftPanel = null;
     this.rightPanel = null;
     this.leftHeader = null;
-    this.notification = null;
     this.chatSearch = null;
-    this.contactsList = null;
+    this.sideMenu = null;
     this.user = null;
   }
 
@@ -25,33 +24,35 @@ export default class UI {
     const clikedContact = e.target.closest('.contact');
     const recipient = clikedContact.dataset.login;
     NetAPI.createChat([this.user.login, recipient]);
+    this.hideMenu(e);
   }
 
-  hideMenu = (e, menu) => {
+  hideMenu = (e) => {
     e.preventDefault();
-    menu.classList.remove('menu_open');
-    setTimeout(() => this.wrapper.removeChild(menu), 200);
+    this.sideMenu.classList.remove('menu_open');
+    setTimeout(() => this.wrapper.removeChild(this.sideMenu), 200);
+    this.sideMenu = null;
   }
 
   showNewChatMenu = () => {
-    const newChatMenuWrapper = create('div', 'side_menu_wrapper', null);
-    this.wrapper.insertBefore(newChatMenuWrapper, this.wrapper.firstChild);
+    this.sideMenu = create('div', 'side_menu_wrapper', null);
+    this.wrapper.insertBefore(this.sideMenu, this.wrapper.firstChild);
 
-    const header = create('header', 'side_menu_header', newChatMenuWrapper);
+    const header = create('header', 'side_menu_header', this.sideMenu);
     const headContentWrapper = create('div', 'smh_content_wrapper', header);
     const backButton = create('button', 'smh_back_button', headContentWrapper);
     create('img', 'back_btn_img', backButton, ['src', leftArrow]);
     const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
     create('span', 'smh_text', headerTextWrapper, ['textContent', 'Новый чат']);
 
-    const searchWrapper = create('div', 'smh_search_wrapper', newChatMenuWrapper);
+    const searchWrapper = create('div', 'smh_search_wrapper', this.sideMenu);
 
     const userContacts = this.user.contacts;
-    this.contactsList = create('div', 'chat_list_wrapper', newChatMenuWrapper);
+    const contactsList = create('div', 'chat_list_wrapper', this.sideMenu);
     for (let i = 0; i < userContacts.length; i += 1) {
       const contact = this.user.contacts[i];
 
-      const wrapper = create('div', 'chat_element contact', this.contactsList, ['login', contact]);
+      const wrapper = create('div', 'chat_element contact', contactsList, ['login', contact]);
 
       const photoWrapper = create('img', 'user_photo_wrapper', wrapper);
       photoWrapper.setAttribute('src', defaultLogo);
@@ -61,10 +62,10 @@ export default class UI {
       create('span', 'chat_list_user_name', infoWrapper, ['textContent', contact]);
     }
 
-    setTimeout(() => newChatMenuWrapper.classList.add('menu_open'), 100);
-    backButton.addEventListener('click', (e) => this.hideMenu(e, newChatMenuWrapper));
+    setTimeout(() => this.sideMenu.classList.add('menu_open'), 100);
+    backButton.addEventListener('click', (e) => this.hideMenu(e, this.sideMenu));
 
-    this.contactsList.addEventListener('click', (e) => this.createNewChat(e));
+    contactsList.addEventListener('click', (e) => this.createNewChat(e));
   }
 
   leftHeaderInit() {

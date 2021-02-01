@@ -4,6 +4,7 @@
 import defaultLogo from '../assets/default_user.svg';
 import create from './utils/create.js';
 import { getChatDate } from './utils/get_date.js';
+import NetAPI from './network_api.js';
 
 export default class ChatList {
   constructor(chat) {
@@ -13,6 +14,10 @@ export default class ChatList {
     this.chat = chat;
     this.activeChatID = null;
     this.userName = null;
+    NetAPI.socket.on('new_chat', (newChat) => {
+      global.localDB.chats.push(newChat);
+      this.init();
+    });
   }
 
   getMessagesFromChat(chatEl) {
