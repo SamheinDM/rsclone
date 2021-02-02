@@ -35,7 +35,9 @@ export default class ChatWindow {
 
   addMessage = (messageObj, isFirstRender) => {
     if (messageObj.message === '') {
-      document.body.dispatchEvent(new Event('new_message'));
+      if (!isFirstRender) {
+        document.body.dispatchEvent(new Event('new_message'));
+      }
     } else {
       const classesObj = this.getClasses(messageObj.from);
       const date = new Date(messageObj.time);

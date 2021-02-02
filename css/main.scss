@@ -63,6 +63,7 @@ body::after {
   left: -30%;
   right: 0;
   bottom: 0;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -119,23 +120,23 @@ body::after {
     }
   }
 
-  .sm_actions_wrapper {
-    width: 100%;
-    height: 49px;
-    display: flex;
-    flex: none;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #faf5f5;
+  // .sm_actions_wrapper {
+  //   width: 100%;
+  //   height: 49px;
+  //   display: flex;
+  //   flex: none;
+  //   align-items: center;
+  //   justify-content: space-evenly;
+  //   background-color: #faf5f5;
 
-    .side_menu_btn {
-      padding: 7px;
-      background-color: rgb(197, 197, 197);
-      border: none;
-      cursor: pointer;
-      outline: none;
-    }
-  }
+  //   .side_menu_btn {
+  //     padding: 7px;
+  //     background-color: rgb(197, 197, 197);
+  //     border: none;
+  //     cursor: pointer;
+  //     outline: none;
+  //   }
+  // }
 }
 
 .menu_open {
@@ -174,6 +175,58 @@ body::after {
       height: 24px;
       padding: 6px;
       cursor: pointer;
+    }
+
+    .menu_btn:active, .menu_btn_active {
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .drop_menu_wrapper {
+      position: relative;
+
+      .drop_menu {
+        min-width: 193px;
+        max-width: 340px;
+        position: absolute;
+        right: 0;
+        top: 36px;
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: rgba(0, 0, 0, 0.26) 0px 2px 5px 0px;
+        opacity: 0;
+        transform-origin: right top;
+        transform: scale(0);
+        transition: transform 0.2s, opacity 0.15s;
+
+        .drop_menu_list {
+          width: 100%;
+          margin: 0;
+          padding: 9px 0;
+          display: block;
+          list-style: none;
+
+          .list_item {
+            height: 40px;
+            padding: 0 0 0 24px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-size: 14.5px;
+          }
+
+          .list_item:hover {
+            background-color: #f5f5f5;
+          }
+        }
+      }
+  
+      .open_drop_menu {
+        transform-origin: right top;
+        transform: scale(1);
+        opacity: 1;
+        transition: transform 0.2s, opacity 0.15s;
+      }
     }
   }
 

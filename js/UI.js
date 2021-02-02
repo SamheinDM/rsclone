@@ -16,6 +16,9 @@ export default class UI {
     this.leftHeader = null;
     this.chatSearch = null;
     this.sideMenu = null;
+    this.mainMenuButton = null;
+    this.dropMenuWrapper = null;
+    this.dropMenu = null;
     this.user = null;
   }
 
@@ -63,9 +66,9 @@ export default class UI {
     const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
     create('span', 'smh_text', headerTextWrapper, ['textContent', 'Новый чат']);
 
-    const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
-    const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
-    const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
+    // const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
+    // const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
+    // const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
 
     const userContacts = this.user.contacts;
     const contactsList = create('div', 'chat_list_wrapper', this.sideMenu);
@@ -88,6 +91,40 @@ export default class UI {
     contactsList.addEventListener('click', (e) => this.createNewChat(e));
   }
 
+  hideDropMenu = (e) => {
+    e.preventDefault();
+    const isClickOnMenu = e.target.closest('.drop_menu');
+    if (isClickOnMenu) {
+      console.log('click on menu');
+    } else {
+      this.dropMenu.classList.remove('open_drop_menu');
+      this.mainMenuButton.classList.remove('menu_btn_active');
+      setTimeout(() => {
+        this.dropMenuWrapper.removeChild(this.dropMenu);
+        this.dropMenu = null;
+      }, 200);
+      document.removeEventListener('click', this.hideDropMenu);
+    }
+  }
+
+  toggleDropMenu = (e) => {
+    if (this.dropMenu) {
+      this.hideDropMenu(e);
+    } else {
+      e.preventDefault();
+      this.dropMenu = create('div', 'drop_menu', this.dropMenuWrapper);
+      const menuList = create('ul', 'drop_menu_list', this.dropMenu);
+      const contactsBtn = create('li', 'list_item', menuList, ['textContent', 'Контакты']);
+      const exitBtn = create('li', 'list_item', menuList, ['textContent', 'Выйти']);
+      this.mainMenuButton.classList.add('menu_btn_active');
+
+      setTimeout(() => {
+        this.dropMenu.classList.add('open_drop_menu');
+        document.addEventListener('click', this.hideDropMenu);
+      }, 100);
+    }
+  }
+
   leftHeaderInit() {
     this.leftHeader = create('header', 'main_header', this.leftPanel);
     const userWrapper = create('div', 'main_user_photo_wrapper', this.leftHeader);
@@ -95,10 +132,12 @@ export default class UI {
     const mainMenuWrapper = create('div', 'main_menu_wrapper', this.leftHeader);
     const newChat = create('div', 'menu_btn', mainMenuWrapper, ['id', 'new_chat']);
     create('img', 'new_chat_icon', newChat, ['src', newChatIcon]);
-    const menu = create('div', 'menu_btn', mainMenuWrapper);
-    create('img', 'menu_icon', menu, ['src', menuIcon]);
+    this.mainMenuButton = create('div', 'menu_btn', mainMenuWrapper, ['id', 'main_menu']);
+    create('img', 'menu_icon', this.mainMenuButton, ['src', menuIcon]);
+    this.dropMenuWrapper = create('span', 'drop_menu_wrapper', mainMenuWrapper);
 
     newChat.addEventListener('click', this.showNewChatMenu);
+    this.mainMenuButton.addEventListener('click', this.toggleDropMenu);
   }
 
   chatSearchInit() {

@@ -39,6 +39,7 @@ export default class ChatList {
       }
       clikedChatElement.classList.add('chat_element_active');
       this.chat.init(this.getMessagesFromChat(clikedChatElement), login);
+      clikedChatElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
   }
 
