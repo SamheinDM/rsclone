@@ -204,6 +204,8 @@ body::after {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  border-right: 1px solid #e0e0e0;
+  overflow: hidden;
 }
 
 .left_panel .main_user_photo_wrapper {
@@ -454,6 +456,7 @@ body::after {
       -ms-flex-positive: 1;
           flex-grow: 1;
   background-color: #fafafa;
+  overflow: hidden;
 }
 
 .right_panel .chat_wrapper {
