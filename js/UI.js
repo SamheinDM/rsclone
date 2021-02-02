@@ -19,19 +19,37 @@ export default class UI {
     this.user = null;
   }
 
+  getChatIndex = (recipient) => {
+    const { chats } = global.localDB;
+    for (let i = 0; i < chats.length; i += 1) {
+      if (chats[i].users.indexOf(recipient) > -1) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   createNewChat = (e) => {
     e.preventDefault();
     const clikedContact = e.target.closest('.contact');
     const recipient = clikedContact.dataset.login;
-    NetAPI.createChat([this.user.login, recipient]);
+    const chatIndex = this.getChatIndex(recipient);
+    if (chatIndex > -1) {
+      const pseudoClickedChat = document.querySelectorAll('.chat')[chatIndex];
+      pseudoClickedChat.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+    } else {
+      NetAPI.createChat([this.user.login, recipient]);
+    }
     this.hideMenu(e);
   }
 
   hideMenu = (e) => {
     e.preventDefault();
     this.sideMenu.classList.remove('menu_open');
-    setTimeout(() => this.wrapper.removeChild(this.sideMenu), 200);
-    this.sideMenu = null;
+    setTimeout(() => {
+      this.wrapper.removeChild(this.sideMenu);
+      this.sideMenu = null;
+    }, 300);
   }
 
   showNewChatMenu = () => {
@@ -45,7 +63,9 @@ export default class UI {
     const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
     create('span', 'smh_text', headerTextWrapper, ['textContent', 'Новый чат']);
 
-    const searchWrapper = create('div', 'smh_search_wrapper', this.sideMenu);
+    const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
+    const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
+    const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
 
     const userContacts = this.user.contacts;
     const contactsList = create('div', 'chat_list_wrapper', this.sideMenu);
@@ -63,7 +83,7 @@ export default class UI {
     }
 
     setTimeout(() => this.sideMenu.classList.add('menu_open'), 100);
-    backButton.addEventListener('click', (e) => this.hideMenu(e, this.sideMenu));
+    backButton.addEventListener('click', (e) => this.hideMenu(e));
 
     contactsList.addEventListener('click', (e) => this.createNewChat(e));
   }
