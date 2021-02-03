@@ -53,6 +53,17 @@ export default class ChatList {
     });
   }
 
+  deleteChat = () => {
+    const deletedChatsArr = global.localDB.user.deletedChatIDs;
+    const deletedChatID = deletedChatsArr[deletedChatsArr.length - 1];
+    if (deletedChatID === this.activeChatID) {
+      this.chat.close();
+      this.init();
+    } else {
+      this.init();
+    }
+  }
+
   findRecipient = (usersArr) => (usersArr[0] === this.userName ? usersArr[1] : usersArr[0]);
 
   init() {
@@ -69,12 +80,11 @@ export default class ChatList {
     this.chatListWrapper = create('div', 'chat_list_wrapper', this.mainPanel);
 
     for (let i = 0; i < this.chatList.length; i += 1) {
-      const wrapper = create('div', 'chat_element chat', this.chatListWrapper, ['index', i]);
+      const recipient = this.findRecipient(this.chatList[i].users);
+      const wrapper = create('div', 'chat_element chat', this.chatListWrapper, ['index', i], ['login', recipient]);
 
       const photoWrapper = create('img', 'user_photo_wrapper', wrapper);
       photoWrapper.setAttribute('src', defaultLogo);
-
-      const recipient = this.findRecipient(this.chatList[i].users);
 
       const { messages } = this.chatList[i];
 

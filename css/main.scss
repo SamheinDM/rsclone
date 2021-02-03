@@ -120,23 +120,23 @@ body::after {
     }
   }
 
-  // .sm_actions_wrapper {
-  //   width: 100%;
-  //   height: 49px;
-  //   display: flex;
-  //   flex: none;
-  //   align-items: center;
-  //   justify-content: space-evenly;
-  //   background-color: #faf5f5;
+  .sm_actions_wrapper {
+    width: 100%;
+    height: 49px;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #faf5f5;
 
-  //   .side_menu_btn {
-  //     padding: 7px;
-  //     background-color: rgb(197, 197, 197);
-  //     border: none;
-  //     cursor: pointer;
-  //     outline: none;
-  //   }
-  // }
+    .side_menu_btn {
+      padding: 7px;
+      background-color: rgb(197, 197, 197);
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+  }
 }
 
 .menu_open {

@@ -24,6 +24,7 @@ function initMainWindow() {
 
 document.body.addEventListener('login', () => initMainWindow());
 document.body.addEventListener('new_message', () => chatList.init());
+document.body.addEventListener('delete_chat', () => chatList.deleteChat());
 
 NetAPI.regResponse(login);
 

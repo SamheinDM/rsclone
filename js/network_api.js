@@ -229,6 +229,10 @@ const NetAPI = (function () {
     socket.emit('message', { messageObj, chatID });
   }
 
+  function deleteContact(userObj) {
+    console.log(' ');
+  }
+
   return {
     socket,
     authResponse,
@@ -237,6 +241,7 @@ const NetAPI = (function () {
     registration,
     regResponse,
     authentication,
+    deleteContact,
   };
 }());
 

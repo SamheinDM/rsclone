@@ -16,6 +16,7 @@ export default class UI {
     this.leftHeader = null;
     this.chatSearch = null;
     this.sideMenu = null;
+    this.selectedContact = null;
     this.mainMenuButton = null;
     this.dropMenuWrapper = null;
     this.dropMenu = null;
@@ -53,23 +54,58 @@ export default class UI {
       this.wrapper.removeChild(this.sideMenu);
       this.sideMenu = null;
     }, 300);
+    this.selectedContact = null;
   }
 
-  showNewChatMenu = () => {
-    this.sideMenu = create('div', 'side_menu_wrapper', null);
-    this.wrapper.insertBefore(this.sideMenu, this.wrapper.firstChild);
-
+  createSideMenuHeader = (headerText) => {
     const header = create('header', 'side_menu_header', this.sideMenu);
     const headContentWrapper = create('div', 'smh_content_wrapper', header);
     const backButton = create('button', 'smh_back_button', headContentWrapper);
     create('img', 'back_btn_img', backButton, ['src', leftArrow]);
     const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
-    create('span', 'smh_text', headerTextWrapper, ['textContent', 'Новый чат']);
+    create('span', 'smh_text', headerTextWrapper, ['textContent', headerText]);
 
-    // const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
-    // const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
-    // const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
+    backButton.addEventListener('click', (e) => this.hideMenu(e));
+  }
 
+  deleteContact = () => {
+    if (this.selectedContact) {
+      const localUser = global.localDB.user;
+      const localChats = global.localDB.chats;
+      document.querySelector('.chat_list_wrapper').removeChild(this.selectedContact);
+
+      const indexOfDeletedContact = localUser.contacts.indexOf(this.selectedContact.dataset.login);
+      localUser.contacts.splice(indexOfDeletedContact, 1);
+
+      let chatIndexToDelete;
+      const chatsArr = document.querySelectorAll('.chat');
+      for (let i = 0; i < chatsArr.length; i += 1) {
+        if (chatsArr[i].dataset.login === this.selectedContact.dataset.login) {
+          chatIndexToDelete = i;
+        }
+      }
+      const chatID = localChats[chatIndexToDelete].id;
+      localUser.deletedChatIDs.push(chatID);
+      const chatIDindex = localUser.chatsIDs.indexOf(chatID);
+      localUser.chatsIDs.splice(chatIDindex, 1);
+      localChats.splice(chatIndexToDelete, 1);
+
+      NetAPI.deleteContact(localUser);
+      document.body.dispatchEvent(new Event('delete_chat'));
+
+      this.selectedContact = null;
+    }
+  }
+
+  createContactsActions = () => {
+    const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
+    const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
+    const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
+
+    delBtn.addEventListener('click', this.deleteContact);
+  }
+
+  createContactsList = (eventHandler) => {
     const userContacts = this.user.contacts;
     const contactsList = create('div', 'chat_list_wrapper', this.sideMenu);
     for (let i = 0; i < userContacts.length; i += 1) {
@@ -85,18 +121,49 @@ export default class UI {
       create('span', 'chat_list_user_name', infoWrapper, ['textContent', contact]);
     }
 
-    setTimeout(() => this.sideMenu.classList.add('menu_open'), 100);
-    backButton.addEventListener('click', (e) => this.hideMenu(e));
+    contactsList.addEventListener('click', (e) => eventHandler(e));
+  }
 
-    contactsList.addEventListener('click', (e) => this.createNewChat(e));
+  showNewChatMenu = () => {
+    this.sideMenu = create('div', 'side_menu_wrapper', null);
+    this.wrapper.insertBefore(this.sideMenu, this.wrapper.firstChild);
+
+    this.createSideMenuHeader('Новый чат');
+    this.createContactsList(this.createNewChat);
+
+    setTimeout(() => this.sideMenu.classList.add('menu_open'), 100);
+  }
+
+  selectContact = (e) => {
+    e.preventDefault();
+    const clikedElement = e.target.closest('.contact');
+    this.selectedContact = clikedElement;
+    const chatListArr = document.querySelectorAll('.contact');
+    for (let i = 0; i < chatListArr.length; i += 1) {
+      chatListArr[i].classList.remove('chat_element_active');
+    }
+    clikedElement.classList.add('chat_element_active');
+  }
+
+  showContactsMenu = () => {
+    this.sideMenu = create('div', 'side_menu_wrapper', null);
+    this.wrapper.insertBefore(this.sideMenu, this.wrapper.firstChild);
+
+    this.createSideMenuHeader('Контакты');
+    this.createContactsActions();
+    this.createContactsList(this.selectContact);
+
+    setTimeout(() => this.sideMenu.classList.add('menu_open'), 100);
+  }
+
+  logout = () => {
+    console.log('logout');
   }
 
   hideDropMenu = (e) => {
     e.preventDefault();
     const isClickOnMenu = e.target.closest('.drop_menu');
-    if (isClickOnMenu) {
-      console.log('click on menu');
-    } else {
+    if (!isClickOnMenu) {
       this.dropMenu.classList.remove('open_drop_menu');
       this.mainMenuButton.classList.remove('menu_btn_active');
       setTimeout(() => {
@@ -108,16 +175,21 @@ export default class UI {
   }
 
   toggleDropMenu = (e) => {
+    const menuList = create('ul', 'drop_menu_list', null);
+    const contactsBtn = create('li', 'list_item', menuList, ['textContent', 'Контакты']);
+    const exitBtn = create('li', 'list_item', menuList, ['textContent', 'Выйти']);
     if (this.dropMenu) {
+      contactsBtn.removeEventListener('click', this.showContactsMenu);
+      exitBtn.removeEventListener('click', this.logout);
       this.hideDropMenu(e);
     } else {
       e.preventDefault();
       this.dropMenu = create('div', 'drop_menu', this.dropMenuWrapper);
-      const menuList = create('ul', 'drop_menu_list', this.dropMenu);
-      const contactsBtn = create('li', 'list_item', menuList, ['textContent', 'Контакты']);
-      const exitBtn = create('li', 'list_item', menuList, ['textContent', 'Выйти']);
+      this.dropMenu.appendChild(menuList);
       this.mainMenuButton.classList.add('menu_btn_active');
 
+      contactsBtn.addEventListener('click', this.showContactsMenu);
+      exitBtn.addEventListener('click', this.logout);
       setTimeout(() => {
         this.dropMenu.classList.add('open_drop_menu');
         document.addEventListener('click', this.hideDropMenu);

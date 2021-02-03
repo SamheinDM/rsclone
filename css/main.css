@@ -182,6 +182,32 @@ body::after {
   color: white;
 }
 
+.side_menu_wrapper .sm_actions_wrapper {
+  width: 100%;
+  height: 49px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  background-color: #faf5f5;
+}
+
+.side_menu_wrapper .sm_actions_wrapper .side_menu_btn {
+  padding: 7px;
+  background-color: #c5c5c5;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
 .menu_open {
   -webkit-transition: -webkit-transform 0.2s;
   transition: -webkit-transform 0.2s;

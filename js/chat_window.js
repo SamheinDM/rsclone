@@ -23,6 +23,23 @@ export default class ChatWindow {
     NetAPI.socket.on('message', (newMsg) => this.addMessage(newMsg));
   }
 
+  close = () => {
+    while (this.mainChatWrapper.firstChild) {
+      this.mainChatWrapper.removeChild(this.mainChatWrapper.lastChild);
+    }
+    this.chatID = null;
+    this.mainChatWrapper = null;
+    this.header = null;
+    this.chatWrapper = null;
+    this.msgsAreaWrapper = null;
+    this.messagesWrapper = null;
+    this.footer = null;
+    this.userName = null;
+    this.lastMsgUsername = null;
+    this.lastMsg = null;
+    this.lastDate = null;
+  }
+
   addDateMessage(date) {
     const wrapper = create('div', 'msg_wrapper time_msg continue_msg', this.messagesWrapper);
     create('span', 'time_msg_text', wrapper, ['textContent', getMessageDate(date)]);
