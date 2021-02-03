@@ -46,5 +46,5 @@ module.exports = {
     compress: true,
     port: 9000,
   },
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: 'production',
 };

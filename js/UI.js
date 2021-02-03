@@ -5,6 +5,7 @@ import defaultLogo from '../assets/default_user.svg';
 import newChatIcon from '../assets/chat_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
 import leftArrow from '../assets/left_arrow.svg';
+import rsschool from '../assets/rs_school_js.svg';
 import NetAPI from './network_api.js';
 
 export default class UI {
@@ -105,7 +106,7 @@ export default class UI {
 
   createContactsActions = () => {
     const actionsWrapper = create('div', 'sm_actions_wrapper', this.sideMenu);
-    const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
+    // const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добави']);
     const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
 
     // addBtn.addEventListener('click', () => NetAPI.getPossibleContacts(this.user));
@@ -225,6 +226,15 @@ export default class UI {
     this.chatSearch = create('div', 'chat_search', this.leftPanel);
   }
 
+  createFooter = () => {
+    const footer = create('footer', 'main_footer', document.body);
+    const createdBy = create('span', 'createdBy', footer, ['textContent', 'Created by: ']);
+    create('a', 'createdBy_link', createdBy, ['href', 'https://github.com/SamheinDM'], ['textContent', 'Perevezencev Maxim']);
+    const logo = create('a', 'grid_item', footer, ['href', 'https://rs.school/js/']);
+    create('img', 'logo_img', logo, ['src', rsschool], ['alt', 'Logo']);
+    create('span', 'year', footer, ['textContent', '2020']);
+  }
+
   init() {
     this.user = global.localDB.user;
     this.wrapper = create('div', 'main_wrapper', this.body);
@@ -232,5 +242,6 @@ export default class UI {
     this.rightPanel = create('div', 'right_panel', this.wrapper, ['id', 'chat_panel']);
     this.leftHeaderInit();
     this.chatSearchInit();
+    this.createFooter();
   }
 }

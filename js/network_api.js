@@ -3,7 +3,7 @@
 import io from './utils/socket.io.js';
 
 const NetAPI = (function () {
-  const socket = io.connect('http://localhost:3000');
+  const socket = io.connect();
 
   let possibleContacts = [];
 
