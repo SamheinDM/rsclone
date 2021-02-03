@@ -86,6 +86,12 @@ export default class UI {
     }
   }
 
+  addContact = () => {
+    // console.log(NetAPI.possibleContacts);
+    // const possibleContactsWrapper = create('div', 'possible_contacts_wrapper', this.wrapper);
+    // const chooseContactsForm = create('form', 'contacts_secelt_form', possibleContactsWrapper);
+  }
+
   createSideMenuHeader = (headerText) => {
     const header = create('header', 'side_menu_header', this.sideMenu);
     const headContentWrapper = create('div', 'smh_content_wrapper', header);
@@ -102,7 +108,9 @@ export default class UI {
     const addBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Добавить']);
     const delBtn = create('button', 'side_menu_btn', actionsWrapper, ['textContent', 'Удалить']);
 
+    // addBtn.addEventListener('click', () => NetAPI.getPossibleContacts(this.user));
     delBtn.addEventListener('click', this.deleteContact);
+    // document.body.addEventListener('possible_contacts', this.addContact);
   }
 
   createContactsList = (eventHandler) => {
@@ -157,7 +165,8 @@ export default class UI {
   }
 
   logout = () => {
-    console.log('logout');
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
   }
 
   hideDropMenu = (e) => {
