@@ -230,7 +230,7 @@ const NetAPI = (function () {
   }
 
   function deleteContact(userObj) {
-    console.log(' ');
+    socket.emit('delete_contact', userObj);
   }
 
   return {

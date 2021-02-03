@@ -57,17 +57,6 @@ export default class UI {
     this.selectedContact = null;
   }
 
-  createSideMenuHeader = (headerText) => {
-    const header = create('header', 'side_menu_header', this.sideMenu);
-    const headContentWrapper = create('div', 'smh_content_wrapper', header);
-    const backButton = create('button', 'smh_back_button', headContentWrapper);
-    create('img', 'back_btn_img', backButton, ['src', leftArrow]);
-    const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
-    create('span', 'smh_text', headerTextWrapper, ['textContent', headerText]);
-
-    backButton.addEventListener('click', (e) => this.hideMenu(e));
-  }
-
   deleteContact = () => {
     if (this.selectedContact) {
       const localUser = global.localDB.user;
@@ -95,6 +84,17 @@ export default class UI {
 
       this.selectedContact = null;
     }
+  }
+
+  createSideMenuHeader = (headerText) => {
+    const header = create('header', 'side_menu_header', this.sideMenu);
+    const headContentWrapper = create('div', 'smh_content_wrapper', header);
+    const backButton = create('button', 'smh_back_button', headContentWrapper);
+    create('img', 'back_btn_img', backButton, ['src', leftArrow]);
+    const headerTextWrapper = create('div', 'smh_text_wrapper', headContentWrapper);
+    create('span', 'smh_text', headerTextWrapper, ['textContent', headerText]);
+
+    backButton.addEventListener('click', (e) => this.hideMenu(e));
   }
 
   createContactsActions = () => {
