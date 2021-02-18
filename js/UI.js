@@ -37,15 +37,17 @@ export default class UI {
   createNewChat = (e) => {
     e.preventDefault();
     const clikedContact = e.target.closest('.contact');
-    const recipient = clikedContact.dataset.login;
-    const chatIndex = this.getChatIndex(recipient);
-    if (chatIndex > -1) {
-      const pseudoClickedChat = document.querySelectorAll('.chat')[chatIndex];
-      pseudoClickedChat.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
-    } else {
-      NetAPI.createChat([this.user.login, recipient]);
+    if (clikedContact) {
+      const recipient = clikedContact.dataset.login;
+      const chatIndex = this.getChatIndex(recipient);
+      if (chatIndex > -1) {
+        const pseudoClickedChat = document.querySelectorAll('.chat')[chatIndex];
+        pseudoClickedChat.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+      } else {
+        NetAPI.createChat([this.user.login, recipient]);
+      }
+      this.hideMenu(e);
     }
-    this.hideMenu(e);
   }
 
   hideMenu = (e) => {
