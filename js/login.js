@@ -14,18 +14,18 @@ export default class Login {
     this.passwordInputAgain = null;
   }
 
-  createErrMsg(text) {
+  createErrMsg = (text) => {
     this.errorMsg = create('span', 'login_error_msg', this.wrapper, ['textContent', text]);
   }
 
-  removeErrMsg() {
+  removeErrMsg = () => {
     if (this.errorMsg) {
       this.wrapper.removeChild(this.errorMsg);
       this.errorMsg = null;
     }
   }
 
-  submitRegistration(event) {
+  submitRegistration = (event) => {
     event.preventDefault();
     this.removeErrMsg();
     if (this.passwordInput.value === this.passwordInputAgain.value) {
@@ -47,7 +47,8 @@ export default class Login {
     }
   }
 
-  initRegistration(event) {
+  initRegistration = (event) => {
+    this.removeErrMsg();
     event.preventDefault();
     this.clearLoginScreen();
 
@@ -82,7 +83,7 @@ export default class Login {
     cancelBtn.addEventListener('click', () => this.init());
   }
 
-  init() {
+  init = () => {
     if (this.wrapper) {
       this.clearLoginScreen();
     } else {
