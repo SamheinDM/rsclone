@@ -148,12 +148,14 @@ export default class UI {
   selectContact = (e) => {
     e.preventDefault();
     const clikedElement = e.target.closest('.contact');
-    this.selectedContact = clikedElement;
-    const chatListArr = document.querySelectorAll('.contact');
-    for (let i = 0; i < chatListArr.length; i += 1) {
-      chatListArr[i].classList.remove('chat_element_active');
+    if (clikedElement) {
+      this.selectedContact = clikedElement;
+      const chatListArr = document.querySelectorAll('.contact');
+      for (let i = 0; i < chatListArr.length; i += 1) {
+        chatListArr[i].classList.remove('chat_element_active');
+      }
+      clikedElement.classList.add('chat_element_active');
     }
-    clikedElement.classList.add('chat_element_active');
   }
 
   showContactsMenu = () => {
